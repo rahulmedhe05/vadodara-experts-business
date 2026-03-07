@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("fire-safety-systems")!;
+
+export const metadata: Metadata = {
+  title: "CO gas detector in Vadodara | Fire Safety Systems | VadodaraExperts",
+  description: "Professional co gas detector services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/fire-safety-systems/co-gas-detector-vadodara" },
+  openGraph: {
+    title: "CO gas detector in Vadodara | VadodaraExperts",
+    description: "Professional co gas detector services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/fire-safety-systems/co-gas-detector-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="co-gas-detector-vadodara" />;
+}
