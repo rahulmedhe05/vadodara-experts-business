@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("sheet-metal-fabrication")!;
+
+export const metadata: Metadata = {
+  title: "electrical enclosure in Vadodara | Sheet Metal Fabrication | VadodaraExperts",
+  description: "Professional electrical enclosure services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/sheet-metal-fabrication/electrical-enclosure-vadodara" },
+  openGraph: {
+    title: "electrical enclosure in Vadodara | VadodaraExperts",
+    description: "Professional electrical enclosure services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/sheet-metal-fabrication/electrical-enclosure-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="electrical-enclosure-vadodara" />;
+}
