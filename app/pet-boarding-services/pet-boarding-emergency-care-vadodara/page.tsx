@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("pet-boarding-services")!;
+
+export const metadata: Metadata = {
+  title: "pet boarding emergency care in Vadodara | Pet Boarding Services | VadodaraExperts",
+  description: "Professional pet boarding emergency care services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/pet-boarding-services/pet-boarding-emergency-care-vadodara" },
+  openGraph: {
+    title: "pet boarding emergency care in Vadodara | VadodaraExperts",
+    description: "Professional pet boarding emergency care services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/pet-boarding-services/pet-boarding-emergency-care-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="pet-boarding-emergency-care-vadodara" />;
+}
