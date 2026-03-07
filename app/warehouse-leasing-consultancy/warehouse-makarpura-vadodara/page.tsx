@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("warehouse-leasing-consultancy")!;
+
+export const metadata: Metadata = {
+  title: "warehouse Makarpura in Vadodara | Warehouse Leasing Consultancy | VadodaraExperts",
+  description: "Professional warehouse makarpura services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/warehouse-leasing-consultancy/warehouse-makarpura-vadodara" },
+  openGraph: {
+    title: "warehouse Makarpura in Vadodara | VadodaraExperts",
+    description: "Professional warehouse makarpura services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/warehouse-leasing-consultancy/warehouse-makarpura-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="warehouse-makarpura-vadodara" />;
+}
