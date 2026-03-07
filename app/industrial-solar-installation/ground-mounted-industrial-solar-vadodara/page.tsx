@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("industrial-solar-installation")!;
+
+export const metadata: Metadata = {
+  title: "ground mounted industrial solar in Vadodara | Industrial Solar Installation | VadodaraExperts",
+  description: "Professional ground mounted industrial solar services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/industrial-solar-installation/ground-mounted-industrial-solar-vadodara" },
+  openGraph: {
+    title: "ground mounted industrial solar in Vadodara | VadodaraExperts",
+    description: "Professional ground mounted industrial solar services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/industrial-solar-installation/ground-mounted-industrial-solar-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="ground-mounted-industrial-solar-vadodara" />;
+}

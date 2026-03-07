@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("industrial-logistics-services")!;
+
+export const metadata: Metadata = {
+  title: "hydraulic axle transport in Vadodara | Industrial Logistics Services | VadodaraExperts",
+  description: "Professional hydraulic axle transport services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/industrial-logistics-services/hydraulic-axle-transport-vadodara" },
+  openGraph: {
+    title: "hydraulic axle transport in Vadodara | VadodaraExperts",
+    description: "Professional hydraulic axle transport services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/industrial-logistics-services/hydraulic-axle-transport-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="hydraulic-axle-transport-vadodara" />;
+}
