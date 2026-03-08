@@ -25521,3 +25521,7 @@ export const nicheKeywords: Record<string, string[]> = {
     "welding-services-eco-friendly-vadodara"
   ]
 };
+
+export function getNicheKeywordSlugs(nicheSlug: string): string[] {
+  return nicheKeywords[nicheSlug] || [];
+}
