@@ -6,6 +6,15 @@
  * VadodaraExperts is the DIRECT service provider — NOT a marketplace.
  */
 
+// Prevent word duplication: "ac services" + "services" → "ac services", also handles singular/plural
+function suffixSafe(name: string, suffix: string): string {
+  const words = name.toLowerCase().trim().split(/\s+/);
+  const lastWord = words[words.length - 1];
+  const suffixLower = suffix.toLowerCase().trim();
+  if (lastWord === suffixLower || lastWord === suffixLower + 's' || lastWord + 's' === suffixLower) return name;
+  return `${name} ${suffix}`;
+}
+
 // ===== SEEDED RANDOM FOR DETERMINISTIC UNIQUENESS =====
 function hashStr(s: string): number {
   let h = 0;
@@ -387,11 +396,11 @@ export function generateNichePageContent(nicheName: string, category: string): N
 
   const introSection = `VadodaraExperts is Vadodara's leading provider of professional ${n} — and we are the actual ${team} that does the work, not a marketplace or directory. Our ${n} ${team !== "professionals" ? "professionals" : "specialists"} are full-time, trained members of our company who ${verb} ${adj} results across the city. From residential homes to commercial offices and industrial facilities, we handle every type of ${n} project with the same dedication and attention to detail. When you call VadodaraExperts, you get a ${team} that stands behind its work with written warranties, ${pricing} pricing, and a genuine commitment to your satisfaction.`;
 
-  const servicesOverview = `Our ${n} services cover everything you need — initial consultation, assessment, full execution, and post-service maintenance. We handle residential, commercial, and industrial ${n} requirements across ${areas}, and dozens more localities. Our ${team} uses professional-grade tools and premium materials on every job. For urgent situations, we offer emergency ${n} service with rapid response times. Wherever you are in Vadodara, VadodaraExperts is a phone call away.`;
+  const servicesOverview = `Our ${suffixSafe(n, 'services')} cover everything you need — initial consultation, assessment, full execution, and post-service maintenance. We handle residential, commercial, and industrial ${n} requirements across ${areas}, and dozens more localities. Our ${team} uses professional-grade tools and premium materials on every job. For urgent situations, we offer emergency ${n} service with rapid response times. Wherever you are in Vadodara, VadodaraExperts is a phone call away.`;
 
   const qualityPromise = `Quality drives everything at VadodaraExperts. Our ${n} ${team} undergoes regular training on the latest techniques, safety standards, and industry practices. We use only premium materials and professional tools, and our multi-step quality inspection ensures every job meets our strict standards. All ${n} work comes with a written ${work} warranty — if anything falls short, we return and fix it at no cost. This commitment has earned us the trust of thousands of customers across Vadodara.`;
 
-  const pricingInfo = `VadodaraExperts offers ${pricing} pricing for all ${n} services. We provide free site assessments and detailed written estimates breaking down labor, materials, tools, and taxes. There are zero hidden charges. Our efficient operations and direct material sourcing allow us to keep rates competitive while maintaining ${adj} ${work}. We accept cash, bank transfers, UPI, and card payments. Whether you need a basic ${n} task or a comprehensive project, we have packages for every budget.`;
+  const pricingInfo = `VadodaraExperts offers ${pricing} pricing for all ${suffixSafe(n, 'services')}. We provide free site assessments and detailed written estimates breaking down labor, materials, tools, and taxes. There are zero hidden charges. Our efficient operations and direct material sourcing allow us to keep rates competitive while maintaining ${adj} ${work}. We accept cash, bank transfers, UPI, and card payments. Whether you need a basic ${n} task or a comprehensive project, we have packages for every budget.`;
 
   const howItWorks: string[][] = [
     [`Tell Us Your ${nicheName} Needs`, `Call, WhatsApp, or submit the enquiry form. Share your location in Vadodara, the scope of work, and preferred timing. Our ${team} responds within minutes.`],
@@ -406,7 +415,7 @@ export function generateNichePageContent(nicheName: string, category: string): N
     { q: `How much does ${n} cost in Vadodara?`, a: `Pricing depends on scope, materials, and complexity. We offer free on-site assessments and ${pricing} written estimates with no hidden charges.` },
     { q: `Is VadodaraExperts a marketplace or the actual provider?`, a: `We are the actual service provider. Our own trained ${team} does the work — no middlemen, no subcontractors, no outsourcing. Quality stays in our control.` },
     { q: `Can I get same-day ${n} in Vadodara?`, a: `Yes. We offer same-day and emergency ${n} service. Call or WhatsApp us for urgent needs and a technician can reach you within hours.` },
-    { q: `Is there warranty on ${n} work from VadodaraExperts?`, a: `Yes. All services include a written ${work} warranty. Any issue due to our work during the warranty period is fixed at zero charge.` },
+    { q: `Is there warranty on ${n} work from VadodaraExperts?`, a: `Yes. All ${suffixSafe(n, 'services')} include a written ${work} warranty. Any issue due to our work during the warranty period is fixed at zero charge.` },
     { q: `How do I book ${n} with VadodaraExperts?`, a: `Submit the form on this page, call us, or WhatsApp your requirement. We respond within minutes, provide a free quote, and schedule at your convenience.` },
   ];
 

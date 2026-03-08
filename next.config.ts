@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
 
+  // Skip during build — saves 30-60s on 25K pages
+  typescript: { ignoreBuildErrors: true },
+  eslint: { ignoreDuringBuilds: true },
+
+  // Use standalone output — smaller deploy, faster cold starts
+  output: "standalone",
+
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 31536000,

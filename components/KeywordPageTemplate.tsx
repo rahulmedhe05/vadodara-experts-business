@@ -1,6 +1,6 @@
  import Link from "next/link";
 import Image from "next/image";
-import { Niche, getRelatedNiches, slugToTitle } from "@/lib/data";
+import { Niche, getRelatedNiches, slugToTitle, withSuffix } from "@/lib/data";
 import { generatePageContent, vadodaraAreas } from "@/lib/content";
 import { getNicheImages, getImageAlt } from "@/lib/images";
 import { generateTestimonials } from "@/lib/testimonials";
@@ -40,7 +40,7 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
     "@context": "https://schema.org",
     "@type": "Service",
     name: `${title} in Vadodara`,
-    description: `Professional ${title.toLowerCase()} services in Vadodara by VadodaraExperts. Affordable pricing, fast service, and quality guaranteed.`,
+    description: `Professional ${withSuffix(title, 'services').toLowerCase()} in Vadodara by VadodaraExperts. Affordable pricing, fast service, and quality guaranteed.`,
     url: `https://vadodaraexperts.com/${niche.slug}/${keyword}`,
     provider: {
       "@type": "LocalBusiness",
@@ -91,7 +91,7 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
           <div className="flex-1">
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-3 drop-shadow-lg">{title} in Vadodara</h1>
             <p className="text-blue-100 text-lg md:text-xl mb-5 max-w-2xl leading-relaxed">
-              Professional {title.toLowerCase()} services by VadodaraExperts.
+              Professional {withSuffix(title, 'services').toLowerCase()} by VadodaraExperts.
               Affordable pricing, fast response, and quality guaranteed.
             </p>
             <div className="flex flex-wrap gap-3">
@@ -110,7 +110,7 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
           {/* Left Content - 700+ words */}
           <div className="lg:col-span-2">
             {/* Intro paragraph */}
-            <h2 className="text-2xl font-bold mb-4">{title} — Professional Services in Vadodara</h2>
+            <h2 className="text-2xl font-bold mb-4">{title} — Professional {niche.name} in Vadodara</h2>
             <p className="text-gray-700 leading-relaxed mb-6">{content.introParagraph}</p>
 
             {/* Content Image */}

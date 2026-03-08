@@ -412,6 +412,15 @@ export function slugToTitle(slug: string): string {
     .join(" ");
 }
 
+// Prevent word duplication: "AC Services" + "Services" → "AC Services" (not "AC Services Services")
+export function withSuffix(name: string, suffix: string): string {
+  const nameWords = name.toLowerCase().split(/\s+/);
+  const lastWord = nameWords[nameWords.length - 1];
+  const suffixWord = suffix.toLowerCase().trim();
+  if (lastWord === suffixWord || lastWord === suffixWord + 's' || lastWord + 's' === suffixWord) return name;
+  return `${name} ${suffix}`;
+}
+
 // Get niche by slug
 export function getNicheBySlug(slug: string): Niche | undefined {
   return niches.find((n) => n.slug === slug);

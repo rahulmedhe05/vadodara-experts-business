@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { slugToTitle, getRelatedNiches } from "@/lib/data";
+import { slugToTitle, getRelatedNiches, withSuffix } from "@/lib/data";
 import { vadodaraAreas, generateLongTailKeywords } from "@/lib/content";
 import { getNicheKeywordSlugs } from "@/lib/niche-keywords";
 
@@ -72,7 +72,7 @@ export default function NicheFooter({
       <section className="bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">
-            All {nicheName} Services in Vadodara
+            All {withSuffix(nicheName, 'Services')} in Vadodara
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm">
             {keywordSlugs.map((kwSlug) => {
