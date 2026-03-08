@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("mechanical-contractor-services")!;
+
+export const metadata: Metadata = {
+  title: "flange fitting in Vadodara | Mechanical Contractor Services | VadodaraExperts",
+  description: "Professional flange fitting services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/mechanical-contractor-services/flange-fitting-vadodara" },
+  openGraph: {
+    title: "flange fitting in Vadodara | VadodaraExperts",
+    description: "Professional flange fitting services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/mechanical-contractor-services/flange-fitting-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="flange-fitting-vadodara" />;
+}
