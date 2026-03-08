@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("abrasive-grinding-suppliers")!;
+
+export const metadata: Metadata = {
+  title: "Abrasive Grinding Suppliers Warranty in Vadodara | Abrasive Grinding Suppliers | VadodaraExperts",
+  description: "Professional abrasive grinding suppliers warranty services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/abrasive-grinding-suppliers/abrasive-grinding-suppliers-warranty-vadodara" },
+  openGraph: {
+    title: "Abrasive Grinding Suppliers Warranty in Vadodara | VadodaraExperts",
+    description: "Professional abrasive grinding suppliers warranty services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/abrasive-grinding-suppliers/abrasive-grinding-suppliers-warranty-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="abrasive-grinding-suppliers-warranty-vadodara" />;
+}
