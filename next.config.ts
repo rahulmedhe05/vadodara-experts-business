@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 
+// Trigger rebuild for public/ changes
 const nextConfig: NextConfig = {
   compress: true,
   poweredByHeader: false,
