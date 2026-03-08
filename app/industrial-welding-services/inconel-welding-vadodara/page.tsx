@@ -1,0 +1,23 @@
+import { Metadata } from "next";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import { getNicheBySlug } from "@/lib/data";
+
+const niche = getNicheBySlug("industrial-welding-services")!;
+
+export const metadata: Metadata = {
+  title: "inconel welding in Vadodara | Industrial Welding Services | VadodaraExperts",
+  description: "Professional inconel welding services in Vadodara. Verified experts, affordable pricing, and fast service. Contact VadodaraExperts today.",
+  alternates: { canonical: "https://vadodaraexperts.com/industrial-welding-services/inconel-welding-vadodara" },
+  openGraph: {
+    title: "inconel welding in Vadodara | VadodaraExperts",
+    description: "Professional inconel welding services in Vadodara from verified experts.",
+    url: "https://vadodaraexperts.com/industrial-welding-services/inconel-welding-vadodara",
+    siteName: "VadodaraExperts",
+    locale: "en_IN",
+    type: "website",
+  },
+};
+
+export default function Page() {
+  return <KeywordPageTemplate niche={niche} keyword="inconel-welding-vadodara" />;
+}
