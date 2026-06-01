@@ -98,8 +98,8 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
             <h1 style={{ fontSize: "clamp(26px,4vw,42px)", fontWeight: 900, color: "#fff", margin: "0 0 16px", lineHeight: 1.2 }}>
               Best {svc} in <span style={{ color: "#22d3ee" }}>{area.name}</span>,<br />Vadodara {yr}
             </h1>
-            <p style={{ fontSize: 17, color: "#94a3b8", margin: "0 0 24px", lineHeight: 1.7 }}>
-              Looking for trusted <strong style={{ color: "#e2e8f0" }}>{niche.name} in {area.name}</strong>? VadodaraExperts connects you with certified, background-verified {niche.name} professionals serving {area.name} and all nearby areas. Affordable rates, same-day availability, 90-day guarantee.
+<p style={{ fontSize: 17, color: "#94a3b8", margin: "0 0 24px", lineHeight: 1.7 }}>
+              Looking for trusted <strong style={{ color: "#e2e8f0" }}>{niche.name} in {area.name}</strong>? VadodaraExperts is {area.name}'s most trusted {niche.name} provider — serving PIN {area.pin} and surrounding localities. Certified experts, same-day availability, 90-day service guarantee. No middlemen — we are the actual service team.
             </p>
             {/* Trust badges */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 28 }}>
@@ -165,7 +165,7 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
               Are you searching for the <strong>best {niche.name} in {area.name}, Vadodara</strong>? You've come to the right place. VadodaraExperts is Vadodara's most trusted platform for {niche.name} in {area.name} and all surrounding areas including {otherAreas.slice(0,4).map(a=>a.name).join(", ")}. Whether you need <strong>{niche.name} for home</strong>, office, apartment, villa, or commercial property — our certified experts in {area.name} are ready to help.
             </p>
             <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: 16 }}>
-              Our <strong>{niche.name} professionals in {area.name}</strong> are fully verified, insured, and trained. We provide <strong>affordable {niche.name} services in {area.name}</strong> with transparent pricing — no hidden charges. Get a <strong>free estimate for {niche.name} in {area.name}</strong> today by calling or WhatsApp-ing us.
+              Our <strong>{niche.name} professionals in {area.name}</strong> are background-checked, insured, and trained by VadodaraExperts. Serving {area.name} (PIN: {area.pin}) and all adjacent localities, we cover every corner of this neighbourhood. Transparent pricing, no hidden charges — get a <strong>free {niche.name} estimate in {area.name}</strong> via WhatsApp in under 15 minutes.
             </p>
             <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: 24 }}>
               Whether you need <strong>emergency {niche.name} in {area.name}</strong>, same-day service, or planned maintenance — VadodaraExperts delivers. Our {niche.name} team covers all of {area.name} including nearby pincodes ({area.pin}). We are the <strong>top-rated {niche.name} company in {area.name}</strong> with 500+ verified customer reviews.

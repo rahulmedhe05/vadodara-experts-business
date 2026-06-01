@@ -329,7 +329,7 @@ const CHEAP_TITLE_SUFFIXES = new Set([
 
 // Filler trailing words in niche names — stripped for cleaner keyword titles
 const FILLER_NICHE_WORDS = new Set([
-  'services', 'suppliers', 'contractors', 'dealers', 'agents', 'manufacturers',
+  'suppliers', 'agents', 'manufacturers',
 ]);
 
 // Provider/role words — don't append "services" after these

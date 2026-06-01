@@ -25,7 +25,17 @@ export default async function sitemap({ id }: { id: number }): Promise<MetadataR
   return slice.map((url) => ({
     url: `${SITE}${url}`,
     lastModified: NOW,
-    changeFrequency: (url === "/" ? "daily" : url.split("/").length === 2 ? "weekly" : "monthly") as "daily" | "weekly" | "monthly",
-    priority: url === "/" ? 1.0 : url.split("/").length === 2 ? 0.8 : 0.6,
+    changeFrequency: (
+      url === "/" ? "daily" :
+      url.split("/").length === 2 ? "weekly" :   // /service-name
+      url.split("/").length === 3 && !url.includes('/sitemap') ? "weekly" :  // /area/service or /service/keyword
+      "monthly"
+    ) as "daily" | "weekly" | "monthly",
+    priority: (
+      url === "/" ? 1.0 :
+      url.split("/").length === 2 ? 0.9 :         // main service pages — highest
+      url.split("/").length === 3 ? 0.7 :         // area pages & keyword pages
+      0.5
+    ),
   }));
 }
