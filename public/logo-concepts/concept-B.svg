@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- Concept B: Location Pin + V — Local & Modern -->
+  <defs>
+    <linearGradient id="pinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dc2626"/>
+      <stop offset="100%" style="stop-color:#f97316"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#334155"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="200" rx="12" fill="#f8fafc"/>
+  <text x="200" y="192" text-anchor="middle" font-family="Arial" font-size="10" fill="#94a3b8">Option B — Location Pin</text>
+
+  <!-- Location pin -->
+  <ellipse cx="80" cy="55" rx="30" ry="30" fill="url(#pinGrad)"/>
+  <path d="M 80 85 L 65 115 L 80 105 L 95 115 Z" fill="url(#pinGrad)"/>
+  <!-- V inside pin -->
+  <text x="80" y="66" text-anchor="middle" font-family="Arial Black" font-weight="900" font-size="30" fill="#ffffff">V</text>
+
+  <!-- Wordmark -->
+  <text x="130" y="65" font-family="Arial Black,sans-serif" font-weight="900" font-size="28" fill="#1e293b">Vadodara</text>
+  <text x="130" y="95" font-family="Arial,sans-serif" font-weight="400" font-size="20" fill="#dc2626" letter-spacing="4">EXPERTS</text>
+  <!-- Underline accent -->
+  <rect x="130" y="100" width="200" height="3" rx="1.5" fill="url(#pinGrad)"/>
+  <text x="130" y="118" font-family="Arial" font-size="9" fill="#94a3b8" letter-spacing="1.5">LOCAL SERVICES, EXPERT HANDS</text>
+</svg>

@@ -18,17 +18,19 @@ export async function generateMetadata({
   const niche = getNicheBySlug(slug);
   if (!niche) return {};
 
-  const title = `${niche.name} in Vadodara | VadodaraExperts`;
-  const description = `Find the best ${niche.name.toLowerCase()} in Vadodara. Verified experts, affordable pricing, and fast service. Book now on VadodaraExperts.`;
+  const yr = new Date().getFullYear();
+  const title = `Best ${niche.name} in Vadodara — Top Rated Experts ${yr} | VadodaraExperts`;
+  const description = `Looking for ${niche.name} in Vadodara? ✅ Certified professionals ✅ Affordable prices ✅ Same-day service ✅ 500+ happy customers. Get free estimate now! Best ${niche.name} near me Vadodara.`;
   const url = `https://vadodaraexperts.com/${niche.slug}`;
 
   return {
     title,
     description,
     alternates: { canonical: url },
+    keywords: `best ${niche.name} in Vadodara, ${niche.name} near me, ${niche.name} Vadodara price, ${niche.name} contact number Vadodara, affordable ${niche.name} Vadodara, top rated ${niche.name} Vadodara`,
     openGraph: {
       title,
-      description: `Find the best ${niche.name.toLowerCase()} in Vadodara. Verified experts, affordable pricing.`,
+      description: `Best ${niche.name} in Vadodara. Verified experts, affordable pricing, same-day service.`,
       url,
       siteName: "VadodaraExperts",
       locale: "en_IN",

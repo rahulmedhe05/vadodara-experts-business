@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Niche, withSuffix } from "@/lib/data";
+import { Niche } from "@/lib/data";
 import { getNicheImages, getImageAlt } from "@/lib/images";
 import { generateNichePageContent } from "@/lib/content";
 import { generateTestimonials } from "@/lib/testimonials";
@@ -29,7 +29,7 @@ export default function NichePageTemplate({ niche }: NichePageProps) {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: `${niche.name} in Vadodara | VadodaraExperts`,
-    description: `Find the best ${withSuffix(niche.name, 'services').toLowerCase()} in Vadodara. Verified experts, affordable pricing, and fast service.`,
+    description: `Find the best ${niche.name.toLowerCase()} in Vadodara. Verified experts, affordable pricing, and fast service.`,
     url: `https://vadodaraexperts.com/${niche.slug}`,
     address: { "@type": "PostalAddress", addressLocality: "Vadodara", addressRegion: "Gujarat", addressCountry: "IN" },
     areaServed: { "@type": "City", name: "Vadodara" },
@@ -64,18 +64,18 @@ export default function NichePageTemplate({ niche }: NichePageProps) {
 
       {/* Hero with Background Image */}
       <section className="relative bg-gradient-to-br from-blue-800 via-blue-900 to-slate-900 text-white py-12 md:py-16 overflow-hidden">
-        <Image
+        {images.hero && <Image
           src={images.hero}
-          alt={`${withSuffix(niche.name, 'Services')} in Vadodara`}
+          alt={`${niche.name} in Vadodara`}
           fill
           className="object-cover opacity-[0.13] pointer-events-none"
           priority
-        />
+        />}
         <div className="relative max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-8">
           <div className="flex-1">
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-3 drop-shadow-lg">{withSuffix(niche.name, 'Services')} in Vadodara</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-3 drop-shadow-lg">{niche.name} in Vadodara</h1>
             <p className="text-blue-100 text-lg md:text-xl max-w-2xl mb-5 leading-relaxed">
-              Professional {withSuffix(niche.name, 'services').toLowerCase()} by VadodaraExperts. Our trained team handles all {niche.name.toLowerCase()} needs across Vadodara — affordable pricing, fast response, and quality guaranteed.
+              {niche.name} in Vadodara by VadodaraExperts. Our trained team handles all your {niche.name.toLowerCase()} needs across Vadodara — affordable pricing, fast response, and quality guaranteed.
             </p>
             <div className="flex flex-wrap gap-3 mb-4">
               <span className="bg-green-500/20 text-green-200 px-4 py-1.5 rounded-full text-sm font-semibold">&#10003; Trained Professionals</span>
@@ -94,10 +94,10 @@ export default function NichePageTemplate({ niche }: NichePageProps) {
           <div className="lg:col-span-2">
             <h2 className="text-2xl font-bold mb-4">About {niche.name} in Vadodara</h2>
             <p className="text-gray-700 leading-relaxed mb-6">{content.introSection}</p>
-            <div className="my-6 rounded-xl overflow-hidden">
-              <Image src={images.content[0]} alt={getImageAlt(niche.name, niche.name)} width={700} height={400} className="w-full h-auto object-cover rounded-xl" />
-            </div>
-            <h3 className="text-xl font-bold mb-3">{withSuffix(niche.name, 'Services')} Overview</h3>
+            {images.content[0] && <div className="my-6 rounded-xl overflow-hidden">
+              <Image src={images.content[0] as string} alt={getImageAlt(niche.name, niche.name)} width={700} height={400} className="w-full h-auto object-cover rounded-xl" />
+            </div>}
+            <h3 className="text-xl font-bold mb-3">{niche.name} Overview</h3>
             <p className="text-gray-700 leading-relaxed mb-6">{content.servicesOverview}</p>
           </div>
           <aside>
@@ -138,34 +138,7 @@ export default function NichePageTemplate({ niche }: NichePageProps) {
           </div>
         </div>
       </section>
-
-      {/* Quality Promise + Pricing */}
-      <section className="bg-gray-50 py-10">
-        <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-2 gap-10">
-          <div>
-            <h2 className="text-2xl font-bold mb-4">Our Quality Promise for {niche.name}</h2>
-            <p className="text-gray-700 leading-relaxed">{content.qualityPromise}</p>
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold mb-4">{withSuffix(niche.name, 'Services')} Pricing in Vadodara</h2>
-            <p className="text-gray-700 leading-relaxed">{content.pricingInfo}</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Image Gallery */}
-      <section className="max-w-7xl mx-auto px-4 py-10">
-        <h2 className="text-2xl font-bold mb-6">{niche.name} Gallery in Vadodara</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[images.hero, images.content[0], images.content[1] || images.content[0], images.hero].map((img, i) => (
-            <div key={i} className="rounded-xl overflow-hidden shadow-md aspect-[4/3]">
-              <Image src={`${img}&sig=${niche.slug}-gallery-${i}`} alt={`${niche.name} in Vadodara - Image ${i + 1}`} width={400} height={300} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Testimonials */}
+{/* Testimonials */}
       <section className="bg-blue-50 py-10">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl font-bold mb-6">What Our Customers Say About {niche.name} in Vadodara</h2>

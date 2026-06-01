@@ -1,6 +1,6 @@
  import Link from "next/link";
 import Image from "next/image";
-import { Niche, getRelatedNiches, slugToTitle, withSuffix } from "@/lib/data";
+import { Niche, getRelatedNiches, slugToTitle, keywordToTitle } from "@/lib/data";
 import { generatePageContent, vadodaraAreas } from "@/lib/content";
 import { getNicheImages, getImageAlt } from "@/lib/images";
 import { generateTestimonials } from "@/lib/testimonials";
@@ -14,7 +14,7 @@ interface KeywordPageProps {
 }
 
 export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps) {
-  const title = slugToTitle(keyword.replace(/-vadodara$/, ''));
+  const title = keywordToTitle(niche.slug, niche.name, keyword);
   const related = getRelatedNiches(niche.slug, 6);
   const content = generatePageContent(niche.slug, niche.name, niche.category, keyword, title);
   const images = getNicheImages(niche.slug, niche.category);
@@ -40,7 +40,7 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
     "@context": "https://schema.org",
     "@type": "Service",
     name: `${title} in Vadodara`,
-    description: `Professional ${withSuffix(title, 'services').toLowerCase()} in Vadodara by VadodaraExperts. Affordable pricing, fast service, and quality guaranteed.`,
+    description: `${title} in Vadodara by VadodaraExperts. Affordable pricing, fast service, and quality guaranteed.`,
     url: `https://vadodaraexperts.com/${niche.slug}/${keyword}`,
     provider: {
       "@type": "LocalBusiness",
@@ -80,19 +80,18 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
 
       {/* Hero with Background Image */}
       <section className="relative bg-gradient-to-br from-blue-800 via-blue-900 to-slate-900 text-white py-12 md:py-16 overflow-hidden">
-        <Image
+        {images.hero && <Image
           src={images.hero}
           alt={`${title} in Vadodara`}
           fill
           className="object-cover opacity-[0.13] pointer-events-none"
           priority
-        />
+        />}
         <div className="relative max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-8">
           <div className="flex-1">
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-3 drop-shadow-lg">{title} in Vadodara</h1>
             <p className="text-blue-100 text-lg md:text-xl mb-5 max-w-2xl leading-relaxed">
-              Professional {withSuffix(title, 'services').toLowerCase()} by VadodaraExperts.
-              Affordable pricing, fast response, and quality guaranteed.
+              {title} in Vadodara — trusted professionals, affordable pricing, quality guaranteed.
             </p>
             <div className="flex flex-wrap gap-3">
               <span className="bg-green-500/20 text-green-200 px-4 py-1.5 rounded-full text-sm font-semibold">&#10003; Verified</span>
@@ -115,13 +114,13 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
 
             {/* Content Image */}
             <div className="my-6 rounded-xl overflow-hidden">
-              <Image
+              {images.content[0] && <Image
                 src={images.content[0]}
                 alt={`${title} service in Vadodara - VadodaraExperts`}
                 width={700}
                 height={400}
                 className="w-full h-auto object-cover rounded-xl"
-              />
+              />}
             </div>
 
             {/* Why Choose Section */}
@@ -153,13 +152,13 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
 
             {/* Second Content Image */}
             <div className="my-6 rounded-xl overflow-hidden">
-              <Image
-                src={images.content[1] || images.content[0]}
+              {(images.content[1] || images.content[0]) && <Image
+                src={(images.content[1] || images.content[0]) as string}
                 alt={`Professional ${niche.name.toLowerCase()} in Vadodara`}
                 width={700}
                 height={400}
                 className="w-full h-auto object-cover rounded-xl"
-              />
+              />}
             </div>
 
             {/* Detailed Content Section */}
@@ -168,18 +167,7 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
 
             {/* Keyword Boost */}
             <p className="text-gray-700 leading-relaxed mb-6">{content.keywordBoostSection}</p>
-
-            {/* Image Gallery */}
-            <h2 className="text-2xl font-bold mb-4">{niche.name} Gallery</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-              {[images.hero, images.content[0], images.content[1] || images.content[0], images.hero, images.content[0], images.content[1] || images.content[0]].map((img, i) => (
-                <div key={i} className="rounded-xl overflow-hidden shadow-md aspect-[4/3]">
-                  <Image src={`${img}&sig=${niche.slug}-kw-${i}`} alt={`${title} in Vadodara - Image ${i + 1}`} width={400} height={300} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
-                </div>
-              ))}
-            </div>
-
-            {/* Testimonials */}
+{/* Testimonials */}
             <h2 className="text-2xl font-bold mb-4">What Customers Say About {title}</h2>
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
               {testimonials.map((review, i) => (

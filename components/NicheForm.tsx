@@ -84,7 +84,7 @@ export default function NicheForm({ nicheSlug, nicheName, category }: NicheFormP
           type="submit"
           className="w-full py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition shadow-lg"
         >
-          Get Free Quotes Now
+          💬 Get FREE Expert Quote Now
         </button>
         <p className="text-xs text-gray-500 text-center">
           By submitting, you agree to be contacted by verified service providers.

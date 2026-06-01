@@ -7,121 +7,35 @@ export interface Niche {
 
 function generateKeywords(slug: string): string[] {
   const kws: string[] = [];
-
-  // 1-15: Modifier prefixes
-  kws.push(`best-${slug}`);
-  kws.push(`affordable-${slug}`);
-  kws.push(`top-${slug}`);
-  kws.push(`cheap-${slug}`);
-  kws.push(`professional-${slug}`);
-  kws.push(`emergency-${slug}`);
-  kws.push(`24-hour-${slug}`);
-  kws.push(`trusted-${slug}`);
-  kws.push(`reliable-${slug}`);
-  kws.push(`experienced-${slug}`);
-  kws.push(`licensed-${slug}`);
-  kws.push(`certified-${slug}`);
-  kws.push(`top-rated-${slug}`);
-  kws.push(`verified-${slug}`);
-  kws.push(`local-${slug}`);
-
-  // 16-30: Suffix intent keywords
-  kws.push(`${slug}-near-me`);
-  kws.push(`${slug}-cost`);
-  kws.push(`${slug}-price`);
-  kws.push(`${slug}-price-list`);
-  kws.push(`${slug}-charges`);
-  kws.push(`${slug}-rates`);
-  kws.push(`${slug}-quotation`);
-  kws.push(`${slug}-free-estimate`);
-  kws.push(`${slug}-reviews`);
-  kws.push(`${slug}-ratings`);
-  kws.push(`${slug}-contact-number`);
-  kws.push(`${slug}-phone-number`);
-  kws.push(`${slug}-whatsapp-number`);
-  kws.push(`${slug}-online-booking`);
-  kws.push(`${slug}-at-home`);
-
-  // 31-45: Use-case / location type
-  kws.push(`${slug}-for-home`);
-  kws.push(`${slug}-for-office`);
-  kws.push(`${slug}-for-commercial`);
-  kws.push(`${slug}-for-residential`);
-  kws.push(`${slug}-for-industrial`);
-  kws.push(`${slug}-for-apartment`);
-  kws.push(`${slug}-for-bungalow`);
-  kws.push(`${slug}-for-villa`);
-  kws.push(`${slug}-for-shop`);
-  kws.push(`${slug}-for-factory`);
-  kws.push(`${slug}-for-hospital`);
-  kws.push(`${slug}-for-school`);
-  kws.push(`${slug}-for-restaurant`);
-  kws.push(`${slug}-for-hotel`);
-  kws.push(`${slug}-for-warehouse`);
-
-  // 46-60: Service type variations
-  kws.push(`${slug}-consultation`);
-  kws.push(`${slug}-inspection`);
-  kws.push(`${slug}-maintenance`);
-  kws.push(`${slug}-installation`);
-  kws.push(`${slug}-replacement`);
-  kws.push(`${slug}-repair`);
-  kws.push(`${slug}-upgrade`);
-  kws.push(`${slug}-servicing`);
-  kws.push(`${slug}-amc`);
-  kws.push(`${slug}-annual-contract`);
-  kws.push(`${slug}-one-time`);
-  kws.push(`${slug}-subscription`);
-  kws.push(`${slug}-on-demand`);
-  kws.push(`${slug}-same-day`);
-  kws.push(`${slug}-express`);
-
-  // 61-75: Business/provider keywords
-  kws.push(`${slug}-company`);
-  kws.push(`${slug}-contractor`);
-  kws.push(`${slug}-expert`);
-  kws.push(`${slug}-specialist`);
-  kws.push(`${slug}-provider`);
-  kws.push(`${slug}-agency`);
-  kws.push(`${slug}-firm`);
-  kws.push(`${slug}-dealer`);
-  kws.push(`${slug}-supplier`);
-  kws.push(`${slug}-vendor`);
-  kws.push(`${slug}-technician`);
-  kws.push(`${slug}-professional`);
-  kws.push(`${slug}-consultant`);
-  kws.push(`${slug}-team`);
-  kws.push(`${slug}-workers`);
-
-  // 76-90: Action / comparison / decision keywords
-  kws.push(`hire-${slug}`);
-  kws.push(`book-${slug}`);
-  kws.push(`find-${slug}`);
-  kws.push(`compare-${slug}`);
-  kws.push(`${slug}-vs-alternatives`);
-  kws.push(`${slug}-benefits`);
-  kws.push(`${slug}-advantages`);
-  kws.push(`${slug}-process`);
-  kws.push(`${slug}-checklist`);
-  kws.push(`${slug}-guide`);
-  kws.push(`${slug}-tips`);
-  kws.push(`${slug}-faq`);
-  kws.push(`${slug}-warranty`);
-  kws.push(`${slug}-guarantee`);
-  kws.push(`${slug}-discount`);
-
-  // 91-100: Long-tail / buyer intent
-  kws.push(`${slug}-with-material`);
-  kws.push(`${slug}-low-cost`);
-  kws.push(`${slug}-high-quality`);
-  kws.push(`${slug}-fast-service`);
-  kws.push(`${slug}-weekend-service`);
-  kws.push(`${slug}-new-construction`);
-  kws.push(`${slug}-old-building`);
-  kws.push(`${slug}-government-approved`);
-  kws.push(`${slug}-latest-technology`);
-  kws.push(`${slug}-eco-friendly`);
-
+  // Block 1: Quality (10)
+  ['best','top','affordable','cheap','professional','trusted','reliable','certified','experienced','local'].forEach(p => kws.push(p+'-'+slug));
+  // Block 2: Urgency (5)
+  ['emergency','24-hour','same-day','express','urgent'].forEach(p => kws.push(p+'-'+slug));
+  // Block 3: Price Intent (8)
+  ['price','cost','charges','rates','price-list','quotation','free-estimate','discount'].forEach(s => kws.push(slug+'-'+s));
+  // Block 4: All 30 Vadodara Areas (30)
+  ['near-me','in-vadodara','in-alkapuri','in-akota','in-manjalpur','in-karelibaug','in-nizampura',
+   'in-gotri','in-sama','in-fatehgunj','in-sayajigunj','in-subhanpura','in-makarpura','in-gorwa',
+   'in-harni','in-waghodia-road','in-padra-road','in-old-padra-road','in-ajwa-road','in-race-course',
+   'in-tandalja','in-tarsali','in-vasna','in-atladara','in-chhani','in-raopura','in-nandesari',
+   'in-gidc','in-dabhoi-road','in-baroda'].forEach(s => kws.push(slug+'-'+s));
+  // Block 5: Use-Case (8)
+  ['for-home','for-apartment','for-office','for-shop','for-commercial','for-residential','for-industrial','for-bungalow'].forEach(s => kws.push(slug+'-'+s));
+  // Block 6: Service Stage (8)
+  ['installation','repair','maintenance','replacement','servicing','amc','at-home','doorstep'].forEach(s => kws.push(slug+'-'+s));
+  // Block 7: Provider Type (7)
+  ['company','contractor','specialist','technician','agency','service-center','consultant'].forEach(s => kws.push(slug+'-'+s));
+  // Block 8: Buying Intent (7)
+  kws.push('hire-'+slug); kws.push('book-'+slug); kws.push('find-'+slug);
+  kws.push(slug+'-contact-number'); kws.push(slug+'-whatsapp-number'); kws.push(slug+'-reviews'); kws.push(slug+'-google-reviews');
+  // Block 9: Hinglish (5)
+  kws.push(slug+'-wala'); kws.push(slug+'-wale'); kws.push(slug+'-vadodara-mein');
+  kws.push('sasta-'+slug); kws.push(slug+'-baroda');
+  // Block 10: Competitive + Intent (12)
+  kws.push('best-'+slug+'-in-vadodara'); kws.push('top-'+slug+'-vadodara'); kws.push('number-one-'+slug+'-vadodara');
+  kws.push(slug+'-guarantee'); kws.push(slug+'-warranty');
+  kws.push('how-to-find-'+slug); kws.push(slug+'-benefits'); kws.push(slug+'-faq');
+  kws.push(slug+'-diwali-offer'); kws.push(slug+'-summer'); kws.push(slug+'-for-corporate'); kws.push(slug+'-for-startup');
   return kws.slice(0, 100);
 }
 
@@ -387,10 +301,6 @@ export const niches: Niche[] = [
   { slug: "welding-services", name: "Welding Services", category: "Industrial Services", keywords: [] },
 ];
 
-// Populate keywords for each niche
-niches.forEach((niche) => {
-  niche.keywords = generateKeywords(niche.slug);
-});
 
 // Helper to get all URLs for sitemap
 export function getAllUrls(): string[] {
@@ -412,14 +322,81 @@ export function slugToTitle(slug: string): string {
     .join(" ");
 }
 
-// Prevent word duplication: "AC Services" + "Services" → "AC Services" (not "AC Services Services")
+// Words that look cheap/spammy in page titles
+const CHEAP_TITLE_SUFFIXES = new Set([
+  'advantages', 'benefits', 'guarantee', 'warranty', 'discount', 'vs-alternatives', 'checklist',
+]);
+
+// Filler trailing words in niche names — stripped for cleaner keyword titles
+const FILLER_NICHE_WORDS = new Set([
+  'services', 'suppliers', 'contractors', 'dealers', 'agents', 'manufacturers',
+]);
+
+// Provider/role words — don't append "services" after these
+const PROVIDER_WORDS = new Set([
+  'company', 'contractor', 'expert', 'specialist', 'provider', 'agency',
+  'firm', 'dealer', 'supplier', 'vendor', 'technician', 'professional',
+  'consultant', 'team', 'workers',
+]);
+
+/**
+ * Generate a clean, natural title for keyword pages.
+ * - Strips redundant "Services"/"Suppliers" from niche name portion
+ * - Removes cheap words like "advantages", "guarantee", "warranty"
+ */
+export function keywordToTitle(nicheSlug: string, nicheName: string, keywordSlug: string): string {
+  const kw = keywordSlug.replace(/-vadodara$/, '');
+
+  if (kw === nicheSlug) return nicheName;
+
+  let prefix = '';
+  let suffix = '';
+
+  if (kw.startsWith(nicheSlug + '-')) {
+    suffix = kw.slice(nicheSlug.length + 1);
+  } else if (kw.endsWith('-' + nicheSlug)) {
+    prefix = kw.slice(0, kw.length - nicheSlug.length - 1);
+  } else {
+    // Handle multi-word prefixes like "top-rated-{slug}"
+    const idx = kw.indexOf(nicheSlug);
+    if (idx > 0) {
+      prefix = kw.slice(0, idx - 1);
+      const rest = kw.slice(idx + nicheSlug.length);
+      if (rest.startsWith('-')) suffix = rest.slice(1);
+    } else {
+      return slugToTitle(kw);
+    }
+  }
+
+  // Clean niche display name — strip filler trailing words
+  const nicheWords = nicheName.split(/\s+/);
+  const lastWord = nicheWords[nicheWords.length - 1].toLowerCase();
+  const displayNiche = (FILLER_NICHE_WORDS.has(lastWord) && nicheWords.length >= 2)
+    ? nicheWords.slice(0, -1).join(' ')
+    : nicheName;
+
+  // Remove cheap suffixes entirely
+  if (CHEAP_TITLE_SUFFIXES.has(suffix)) suffix = '';
+
+  const parts: string[] = [];
+  if (prefix) parts.push(slugToTitle(prefix));
+  parts.push(displayNiche);
+  if (suffix) parts.push(slugToTitle(suffix));
+  return parts.join(' ');
+}
+
+// Prevent word duplication + don't add "services" after role words
 export function withSuffix(name: string, suffix: string): string {
   const nameWords = name.toLowerCase().split(/\s+/);
   const lastWord = nameWords[nameWords.length - 1];
   const suffixWord = suffix.toLowerCase().trim();
   if (lastWord === suffixWord || lastWord === suffixWord + 's' || lastWord + 's' === suffixWord) return name;
+  // Don't add "services" after provider/role words
+  if (suffixWord === 'services' && PROVIDER_WORDS.has(lastWord)) return name;
   return `${name} ${suffix}`;
 }
+
+
 
 // Get niche by slug
 export function getNicheBySlug(slug: string): Niche | undefined {
@@ -434,3 +411,787 @@ export function getRelatedNiches(slug: string, limit = 10): Niche[] {
     .filter((n) => n.category === niche.category && n.slug !== slug)
     .slice(0, limit);
 }
+
+// ── 1000 NEW SERVICES ──────────────────────────────────────────────────
+niches.push(
+  // Home Renovation
+  { slug: "bathroom-renovation-services", name: "Bathroom Renovation Services", category: "Home Renovation", keywords: [] },
+  { slug: "kitchen-renovation-services", name: "Kitchen Renovation Services", category: "Home Renovation", keywords: [] },
+  { slug: "wooden-flooring-services", name: "Wooden Flooring Services", category: "Home Renovation", keywords: [] },
+  { slug: "vinyl-flooring-services", name: "Vinyl Flooring Services", category: "Home Renovation", keywords: [] },
+  { slug: "laminate-flooring-services", name: "Laminate Flooring Services", category: "Home Renovation", keywords: [] },
+  { slug: "pvc-flooring-services", name: "PVC Flooring Services", category: "Home Renovation", keywords: [] },
+  { slug: "door-installation-services", name: "Door Installation Services", category: "Home Renovation", keywords: [] },
+  { slug: "window-installation-services", name: "Window Installation Services", category: "Home Renovation", keywords: [] },
+  { slug: "staircase-design-services", name: "Staircase Design Services", category: "Home Renovation", keywords: [] },
+  { slug: "home-theater-installation", name: "Home Theater Installation", category: "Home Renovation", keywords: [] },
+  { slug: "tv-panel-installation", name: "TV Panel Installation", category: "Home Renovation", keywords: [] },
+  { slug: "partition-wall-services", name: "Partition Wall Services", category: "Home Renovation", keywords: [] },
+  { slug: "pop-ceiling-services", name: "POP Ceiling Services", category: "Home Renovation", keywords: [] },
+  { slug: "wallpaper-installation-services", name: "Wallpaper Installation Services", category: "Home Renovation", keywords: [] },
+  { slug: "texture-painting-services", name: "Texture Painting Services", category: "Home Renovation", keywords: [] },
+  { slug: "granite-countertop-installation", name: "Granite Countertop Installation", category: "Home Renovation", keywords: [] },
+  { slug: "home-gym-setup-services", name: "Home Gym Setup Services", category: "Home Renovation", keywords: [] },
+  { slug: "baby-proofing-services", name: "Baby Proofing Services", category: "Home Renovation", keywords: [] },
+  { slug: "grill-fabrication-services", name: "Grill Fabrication Services", category: "Home Renovation", keywords: [] },
+  { slug: "gate-installation-services", name: "Gate Installation Services", category: "Home Renovation", keywords: [] },
+  { slug: "compound-wall-construction", name: "Compound Wall Construction", category: "Home Renovation", keywords: [] },
+  { slug: "underground-water-tank-construction", name: "Underground Water Tank Construction", category: "Home Renovation", keywords: [] },
+  { slug: "overhead-tank-installation", name: "Overhead Tank Installation", category: "Home Renovation", keywords: [] },
+  { slug: "septic-tank-services", name: "Septic Tank Services", category: "Home Renovation", keywords: [] },
+  { slug: "insulation-services", name: "Insulation Services", category: "Home Renovation", keywords: [] },
+  { slug: "acoustic-treatment-services", name: "Acoustic Treatment Services", category: "Home Renovation", keywords: [] },
+  { slug: "sliding-door-installation", name: "Sliding Door Installation", category: "Home Renovation", keywords: [] },
+  { slug: "upvc-window-installation", name: "UPVC Window Installation", category: "Home Renovation", keywords: [] },
+  { slug: "glass-railing-services", name: "Glass Railing Services", category: "Home Renovation", keywords: [] },
+  { slug: "stainless-railing-services", name: "Stainless Steel Railing Services", category: "Home Renovation", keywords: [] },
+  { slug: "cladding-services", name: "Cladding Services", category: "Home Renovation", keywords: [] },
+  { slug: "roof-terrace-waterproofing", name: "Roof & Terrace Waterproofing", category: "Home Renovation", keywords: [] },
+  { slug: "basement-waterproofing", name: "Basement Waterproofing", category: "Home Renovation", keywords: [] },
+  { slug: "external-wall-coating", name: "External Wall Coating", category: "Home Renovation", keywords: [] },
+  { slug: "heat-proof-paint-services", name: "Heat Proof Paint Services", category: "Home Renovation", keywords: [] },
+  { slug: "anti-termite-treatment", name: "Anti-Termite Treatment", category: "Home Renovation", keywords: [] },
+
+  // Cleaning Services
+  { slug: "mattress-cleaning-services", name: "Mattress Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "upholstery-cleaning-services", name: "Upholstery Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "curtain-cleaning-services", name: "Curtain Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "marble-polishing-services", name: "Marble Polishing Services", category: "Cleaning Services", keywords: [] },
+  { slug: "floor-polishing-services", name: "Floor Polishing Services", category: "Cleaning Services", keywords: [] },
+  { slug: "facade-cleaning-services", name: "Facade Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "post-construction-cleaning", name: "Post Construction Cleaning", category: "Cleaning Services", keywords: [] },
+  { slug: "deep-cleaning-services", name: "Deep Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "sanitization-services", name: "Sanitization Services", category: "Cleaning Services", keywords: [] },
+  { slug: "disinfection-services", name: "Disinfection Services", category: "Cleaning Services", keywords: [] },
+  { slug: "office-cleaning-services", name: "Office Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "school-cleaning-services", name: "School Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "hospital-cleaning-services", name: "Hospital Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "restaurant-cleaning-services", name: "Restaurant Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "swimming-pool-cleaning", name: "Swimming Pool Cleaning", category: "Cleaning Services", keywords: [] },
+  { slug: "laundry-services", name: "Laundry Services", category: "Cleaning Services", keywords: [] },
+  { slug: "dry-cleaning-services", name: "Dry Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "shoe-cleaning-services", name: "Shoe Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "car-interior-cleaning", name: "Car Interior Cleaning", category: "Cleaning Services", keywords: [] },
+  { slug: "washroom-cleaning-services", name: "Washroom Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "kitchen-cleaning-services", name: "Kitchen Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "commercial-kitchen-cleaning", name: "Commercial Kitchen Cleaning", category: "Cleaning Services", keywords: [] },
+  { slug: "air-duct-cleaning-services", name: "Air Duct Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "drainage-cleaning-services", name: "Drainage Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "sewage-cleaning-services", name: "Sewage Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "commercial-laundry-services", name: "Commercial Laundry Services", category: "Cleaning Services", keywords: [] },
+  { slug: "carpet-shampooing-services", name: "Carpet Shampooing Services", category: "Cleaning Services", keywords: [] },
+  { slug: "grease-cleaning-services", name: "Grease Cleaning Services", category: "Cleaning Services", keywords: [] },
+  { slug: "chimney-duct-cleaning", name: "Chimney Duct Cleaning", category: "Cleaning Services", keywords: [] },
+  { slug: "water-cooler-cleaning", name: "Water Cooler Cleaning", category: "Cleaning Services", keywords: [] },
+
+  // Beauty & Personal Care
+  { slug: "ladies-hair-salon", name: "Ladies Hair Salon", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "gents-hair-salon", name: "Gents Hair Salon", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "bridal-makeup-services", name: "Bridal Makeup Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "makeup-artists", name: "Makeup Artists", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "mehndi-artists", name: "Mehndi Artists", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "nail-art-studio", name: "Nail Art Studio", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "spa-services", name: "Spa Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "body-massage-services", name: "Body Massage Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "ayurvedic-massage-services", name: "Ayurvedic Massage Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "thai-massage-services", name: "Thai Massage Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "skin-care-clinics", name: "Skin Care Clinics", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "laser-hair-removal", name: "Laser Hair Removal", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "tattoo-studio", name: "Tattoo Studio", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "eyebrow-threading-services", name: "Eyebrow Threading Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "waxing-services", name: "Waxing Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "pedicure-manicure-services", name: "Pedicure Manicure Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "hair-coloring-services", name: "Hair Coloring Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "hair-smoothening-services", name: "Hair Smoothening Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "keratin-treatment-services", name: "Keratin Treatment Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "hair-extensions-services", name: "Hair Extensions Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "barbershop-services", name: "Barbershop Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "unisex-salon", name: "Unisex Salon", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "beauty-parlour-services", name: "Beauty Parlour Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "eyelash-extension-services", name: "Eyelash Extension Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "permanent-makeup-services", name: "Permanent Makeup Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "facial-services", name: "Facial Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "hair-spa-services", name: "Hair Spa Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "weight-loss-clinic", name: "Weight Loss Clinic", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "slimming-centre", name: "Slimming Centre", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "microblading-services", name: "Microblading Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "body-contouring-services", name: "Body Contouring Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "hair-loss-treatment", name: "Hair Loss Treatment", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "prp-treatment-services", name: "PRP Treatment Services", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "anti-aging-treatment", name: "Anti-Aging Treatment", category: "Beauty & Personal Care", keywords: [] },
+  { slug: "teeth-whitening-services", name: "Teeth Whitening Services", category: "Beauty & Personal Care", keywords: [] },
+
+  // Healthcare
+  { slug: "general-physician-clinic", name: "General Physician Clinic", category: "Healthcare", keywords: [] },
+  { slug: "pediatrician-clinic", name: "Pediatrician Clinic", category: "Healthcare", keywords: [] },
+  { slug: "orthopedic-clinic", name: "Orthopedic Clinic", category: "Healthcare", keywords: [] },
+  { slug: "cardiologist-clinic", name: "Cardiologist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "neurologist-clinic", name: "Neurologist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "psychiatrist-clinic", name: "Psychiatrist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "dietitian-nutritionist", name: "Dietitian & Nutritionist", category: "Healthcare", keywords: [] },
+  { slug: "homeopathy-clinics", name: "Homeopathy Clinics", category: "Healthcare", keywords: [] },
+  { slug: "ayurveda-clinics", name: "Ayurveda Clinics", category: "Healthcare", keywords: [] },
+  { slug: "naturopathy-clinics", name: "Naturopathy Clinics", category: "Healthcare", keywords: [] },
+  { slug: "acupuncture-services", name: "Acupuncture Services", category: "Healthcare", keywords: [] },
+  { slug: "home-nursing-services", name: "Home Nursing Services", category: "Healthcare", keywords: [] },
+  { slug: "ambulance-services", name: "Ambulance Services", category: "Healthcare", keywords: [] },
+  { slug: "medical-equipment-rental", name: "Medical Equipment Rental", category: "Healthcare", keywords: [] },
+  { slug: "wheelchair-rental-services", name: "Wheelchair Rental Services", category: "Healthcare", keywords: [] },
+  { slug: "speech-therapy-services", name: "Speech Therapy Services", category: "Healthcare", keywords: [] },
+  { slug: "occupational-therapy-services", name: "Occupational Therapy Services", category: "Healthcare", keywords: [] },
+  { slug: "hearing-aid-clinics", name: "Hearing Aid Clinics", category: "Healthcare", keywords: [] },
+  { slug: "mri-scan-centres", name: "MRI Scan Centres", category: "Healthcare", keywords: [] },
+  { slug: "ct-scan-centres", name: "CT Scan Centres", category: "Healthcare", keywords: [] },
+  { slug: "sonography-centres", name: "Sonography Centres", category: "Healthcare", keywords: [] },
+  { slug: "xray-centres", name: "X-Ray Centres", category: "Healthcare", keywords: [] },
+  { slug: "pharmacy-services", name: "Pharmacy Services", category: "Healthcare", keywords: [] },
+  { slug: "gynecologist-clinic", name: "Gynecologist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "ent-specialist-clinic", name: "ENT Specialist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "gastroenterologist-clinic", name: "Gastroenterologist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "urologist-clinic", name: "Urologist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "oncologist-clinic", name: "Oncologist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "pulmonologist-clinic", name: "Pulmonologist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "endocrinologist-clinic", name: "Endocrinologist Clinic", category: "Healthcare", keywords: [] },
+  { slug: "diabetes-management-clinic", name: "Diabetes Management Clinic", category: "Healthcare", keywords: [] },
+  { slug: "kidney-stone-treatment", name: "Kidney Stone Treatment", category: "Healthcare", keywords: [] },
+  { slug: "back-pain-treatment", name: "Back Pain Treatment", category: "Healthcare", keywords: [] },
+  { slug: "de-addiction-centre", name: "De-Addiction Centre", category: "Healthcare", keywords: [] },
+  { slug: "mental-health-clinic", name: "Mental Health Clinic", category: "Healthcare", keywords: [] },
+  { slug: "cosmetic-surgery-clinic", name: "Cosmetic Surgery Clinic", category: "Healthcare", keywords: [] },
+  { slug: "blood-bank-services", name: "Blood Bank Services", category: "Healthcare", keywords: [] },
+  { slug: "home-health-aide-services", name: "Home Health Aide Services", category: "Healthcare", keywords: [] },
+  { slug: "elder-care-services", name: "Elder Care Services", category: "Healthcare", keywords: [] },
+  { slug: "medical-tourism-consultancy", name: "Medical Tourism Consultancy", category: "Healthcare", keywords: [] },
+  { slug: "podiatry-services", name: "Podiatry Services", category: "Healthcare", keywords: [] },
+  { slug: "allergy-testing-clinic", name: "Allergy Testing Clinic", category: "Healthcare", keywords: [] },
+  { slug: "sleep-clinic-services", name: "Sleep Clinic Services", category: "Healthcare", keywords: [] },
+  { slug: "rehabilitation-centre", name: "Rehabilitation Centre", category: "Healthcare", keywords: [] },
+  { slug: "pain-management-clinic", name: "Pain Management Clinic", category: "Healthcare", keywords: [] },
+  { slug: "orthodontic-clinic", name: "Orthodontic Clinic", category: "Healthcare", keywords: [] },
+  { slug: "dental-implant-services", name: "Dental Implant Services", category: "Healthcare", keywords: [] },
+  { slug: "smile-makeover-services", name: "Smile Makeover Services", category: "Healthcare", keywords: [] },
+
+  // Food & Dining
+  { slug: "tiffin-services", name: "Tiffin Services", category: "Food & Dining", keywords: [] },
+  { slug: "home-cooked-food-delivery", name: "Home Cooked Food Delivery", category: "Food & Dining", keywords: [] },
+  { slug: "corporate-food-delivery", name: "Corporate Food Delivery", category: "Food & Dining", keywords: [] },
+  { slug: "cloud-kitchen-services", name: "Cloud Kitchen Services", category: "Food & Dining", keywords: [] },
+  { slug: "bakery-services", name: "Bakery Services", category: "Food & Dining", keywords: [] },
+  { slug: "custom-cake-services", name: "Custom Cake Services", category: "Food & Dining", keywords: [] },
+  { slug: "wedding-cake-services", name: "Wedding Cake Services", category: "Food & Dining", keywords: [] },
+  { slug: "jain-catering-services", name: "Jain Catering Services", category: "Food & Dining", keywords: [] },
+  { slug: "veg-catering-services", name: "Veg Catering Services", category: "Food & Dining", keywords: [] },
+  { slug: "non-veg-catering-services", name: "Non-Veg Catering Services", category: "Food & Dining", keywords: [] },
+  { slug: "south-indian-catering", name: "South Indian Catering", category: "Food & Dining", keywords: [] },
+  { slug: "chef-on-hire-services", name: "Chef on Hire Services", category: "Food & Dining", keywords: [] },
+  { slug: "cooking-classes", name: "Cooking Classes", category: "Food & Dining", keywords: [] },
+  { slug: "baking-classes", name: "Baking Classes", category: "Food & Dining", keywords: [] },
+  { slug: "bartender-services", name: "Bartender Services", category: "Food & Dining", keywords: [] },
+  { slug: "food-truck-services", name: "Food Truck Services", category: "Food & Dining", keywords: [] },
+  { slug: "mithai-shop-services", name: "Mithai Shop Services", category: "Food & Dining", keywords: [] },
+  { slug: "juice-bar-services", name: "Juice Bar Services", category: "Food & Dining", keywords: [] },
+  { slug: "breakfast-catering-services", name: "Breakfast Catering Services", category: "Food & Dining", keywords: [] },
+  { slug: "school-canteen-services", name: "School Canteen Services", category: "Food & Dining", keywords: [] },
+  { slug: "meal-prep-services", name: "Meal Prep Services", category: "Food & Dining", keywords: [] },
+  { slug: "diet-meal-delivery", name: "Diet Meal Delivery", category: "Food & Dining", keywords: [] },
+  { slug: "party-snacks-catering", name: "Party Snacks Catering", category: "Food & Dining", keywords: [] },
+  { slug: "ice-cream-catering", name: "Ice Cream Catering", category: "Food & Dining", keywords: [] },
+  { slug: "chocolate-making-classes", name: "Chocolate Making Classes", category: "Food & Dining", keywords: [] },
+
+  // Education & Training
+  { slug: "computer-classes", name: "Computer Classes", category: "Education & Training", keywords: [] },
+  { slug: "tally-training-classes", name: "Tally Training Classes", category: "Education & Training", keywords: [] },
+  { slug: "accounting-classes", name: "Accounting Classes", category: "Education & Training", keywords: [] },
+  { slug: "upsc-coaching", name: "UPSC Coaching", category: "Education & Training", keywords: [] },
+  { slug: "gpsc-coaching", name: "GPSC Coaching", category: "Education & Training", keywords: [] },
+  { slug: "iit-jee-coaching", name: "IIT JEE Coaching", category: "Education & Training", keywords: [] },
+  { slug: "neet-coaching", name: "NEET Coaching", category: "Education & Training", keywords: [] },
+  { slug: "french-language-classes", name: "French Language Classes", category: "Education & Training", keywords: [] },
+  { slug: "german-language-classes", name: "German Language Classes", category: "Education & Training", keywords: [] },
+  { slug: "hindi-language-classes", name: "Hindi Language Classes", category: "Education & Training", keywords: [] },
+  { slug: "gujarati-language-classes", name: "Gujarati Language Classes", category: "Education & Training", keywords: [] },
+  { slug: "dance-classes", name: "Dance Classes", category: "Education & Training", keywords: [] },
+  { slug: "kathak-dance-classes", name: "Kathak Dance Classes", category: "Education & Training", keywords: [] },
+  { slug: "bollywood-dance-classes", name: "Bollywood Dance Classes", category: "Education & Training", keywords: [] },
+  { slug: "western-dance-classes", name: "Western Dance Classes", category: "Education & Training", keywords: [] },
+  { slug: "music-classes", name: "Music Classes", category: "Education & Training", keywords: [] },
+  { slug: "guitar-classes", name: "Guitar Classes", category: "Education & Training", keywords: [] },
+  { slug: "keyboard-piano-classes", name: "Keyboard & Piano Classes", category: "Education & Training", keywords: [] },
+  { slug: "tabla-classes", name: "Tabla Classes", category: "Education & Training", keywords: [] },
+  { slug: "vocal-singing-classes", name: "Vocal & Singing Classes", category: "Education & Training", keywords: [] },
+  { slug: "drawing-art-classes", name: "Drawing & Art Classes", category: "Education & Training", keywords: [] },
+  { slug: "abacus-classes", name: "Abacus Classes", category: "Education & Training", keywords: [] },
+  { slug: "vedic-math-classes", name: "Vedic Math Classes", category: "Education & Training", keywords: [] },
+  { slug: "chess-coaching", name: "Chess Coaching", category: "Education & Training", keywords: [] },
+  { slug: "cricket-coaching", name: "Cricket Coaching", category: "Education & Training", keywords: [] },
+  { slug: "football-coaching", name: "Football Coaching", category: "Education & Training", keywords: [] },
+  { slug: "swimming-coaching", name: "Swimming Coaching", category: "Education & Training", keywords: [] },
+  { slug: "badminton-coaching", name: "Badminton Coaching", category: "Education & Training", keywords: [] },
+  { slug: "table-tennis-coaching", name: "Table Tennis Coaching", category: "Education & Training", keywords: [] },
+  { slug: "tennis-coaching", name: "Tennis Coaching", category: "Education & Training", keywords: [] },
+  { slug: "skating-classes", name: "Skating Classes", category: "Education & Training", keywords: [] },
+  { slug: "karate-martial-arts-classes", name: "Karate & Martial Arts Classes", category: "Education & Training", keywords: [] },
+  { slug: "gymnastics-classes", name: "Gymnastics Classes", category: "Education & Training", keywords: [] },
+  { slug: "robotics-classes-for-kids", name: "Robotics Classes for Kids", category: "Education & Training", keywords: [] },
+  { slug: "coding-classes-for-kids", name: "Coding Classes for Kids", category: "Education & Training", keywords: [] },
+  { slug: "montessori-school", name: "Montessori School", category: "Education & Training", keywords: [] },
+  { slug: "playschool-preschool", name: "Playschool & Preschool", category: "Education & Training", keywords: [] },
+  { slug: "daycare-services", name: "Daycare Services", category: "Education & Training", keywords: [] },
+  { slug: "home-tutoring-services", name: "Home Tutoring Services", category: "Education & Training", keywords: [] },
+  { slug: "special-education-services", name: "Special Education Services", category: "Education & Training", keywords: [] },
+  { slug: "soft-skills-training", name: "Soft Skills Training", category: "Education & Training", keywords: [] },
+  { slug: "public-speaking-coaching", name: "Public Speaking Coaching", category: "Education & Training", keywords: [] },
+  { slug: "personality-development-classes", name: "Personality Development Classes", category: "Education & Training", keywords: [] },
+  { slug: "career-counseling-services", name: "Career Counseling Services", category: "Education & Training", keywords: [] },
+  { slug: "interview-coaching-services", name: "Interview Coaching Services", category: "Education & Training", keywords: [] },
+  { slug: "resume-writing-services", name: "Resume Writing Services", category: "Education & Training", keywords: [] },
+  { slug: "mba-coaching-classes", name: "MBA Coaching Classes", category: "Education & Training", keywords: [] },
+  { slug: "bank-exam-coaching", name: "Bank Exam Coaching", category: "Education & Training", keywords: [] },
+  { slug: "ssc-coaching", name: "SSC Coaching", category: "Education & Training", keywords: [] },
+  { slug: "ielts-toefl-coaching", name: "IELTS & TOEFL Coaching", category: "Education & Training", keywords: [] },
+  { slug: "ca-coaching-classes", name: "CA Coaching Classes", category: "Education & Training", keywords: [] },
+  { slug: "cs-coaching-classes", name: "CS Coaching Classes", category: "Education & Training", keywords: [] },
+  { slug: "digital-marketing-training", name: "Digital Marketing Training", category: "Education & Training", keywords: [] },
+  { slug: "fashion-design-institute", name: "Fashion Design Institute", category: "Education & Training", keywords: [] },
+  { slug: "photography-training-classes", name: "Photography Training Classes", category: "Education & Training", keywords: [] },
+  { slug: "acting-classes", name: "Acting Classes", category: "Education & Training", keywords: [] },
+  { slug: "culinary-school", name: "Culinary School", category: "Education & Training", keywords: [] },
+  { slug: "paramedical-training", name: "Paramedical Training", category: "Education & Training", keywords: [] },
+
+  // Automotive
+  { slug: "car-repair-services", name: "Car Repair Services", category: "Automotive", keywords: [] },
+  { slug: "car-washing-services", name: "Car Washing Services", category: "Automotive", keywords: [] },
+  { slug: "car-detailing-services", name: "Car Detailing Services", category: "Automotive", keywords: [] },
+  { slug: "car-painting-services", name: "Car Painting Services", category: "Automotive", keywords: [] },
+  { slug: "car-denting-services", name: "Car Denting Services", category: "Automotive", keywords: [] },
+  { slug: "car-ac-repair", name: "Car AC Repair", category: "Automotive", keywords: [] },
+  { slug: "car-battery-services", name: "Car Battery Services", category: "Automotive", keywords: [] },
+  { slug: "car-tyre-services", name: "Car Tyre Services", category: "Automotive", keywords: [] },
+  { slug: "car-wheel-alignment", name: "Car Wheel Alignment", category: "Automotive", keywords: [] },
+  { slug: "car-rental-services", name: "Car Rental Services", category: "Automotive", keywords: [] },
+  { slug: "bike-repair-services", name: "Bike Repair Services", category: "Automotive", keywords: [] },
+  { slug: "bike-washing-services", name: "Bike Washing Services", category: "Automotive", keywords: [] },
+  { slug: "two-wheeler-repair", name: "Two-Wheeler Repair", category: "Automotive", keywords: [] },
+  { slug: "electric-vehicle-repair", name: "Electric Vehicle Repair", category: "Automotive", keywords: [] },
+  { slug: "truck-repair-services", name: "Truck Repair Services", category: "Automotive", keywords: [] },
+  { slug: "auto-rickshaw-repair", name: "Auto Rickshaw Repair", category: "Automotive", keywords: [] },
+  { slug: "car-accessories-shop", name: "Car Accessories Shop", category: "Automotive", keywords: [] },
+  { slug: "car-audio-installation", name: "Car Audio & Video Installation", category: "Automotive", keywords: [] },
+  { slug: "driving-school", name: "Driving School", category: "Automotive", keywords: [] },
+  { slug: "rto-documentation-services", name: "RTO Documentation Services", category: "Automotive", keywords: [] },
+  { slug: "vehicle-insurance-services", name: "Vehicle Insurance Services", category: "Automotive", keywords: [] },
+  { slug: "used-car-dealers", name: "Used Car Dealers", category: "Automotive", keywords: [] },
+  { slug: "used-bike-dealers", name: "Used Bike Dealers", category: "Automotive", keywords: [] },
+  { slug: "car-loan-services", name: "Car Loan Services", category: "Automotive", keywords: [] },
+  { slug: "towing-services", name: "Towing Services", category: "Automotive", keywords: [] },
+  { slug: "roadside-assistance-services", name: "Roadside Assistance Services", category: "Automotive", keywords: [] },
+  { slug: "fleet-management-services", name: "Fleet Management Services", category: "Automotive", keywords: [] },
+  { slug: "corporate-cab-services", name: "Corporate Cab Services", category: "Automotive", keywords: [] },
+  { slug: "car-glass-replacement", name: "Car Glass Replacement", category: "Automotive", keywords: [] },
+  { slug: "pollution-check-centre", name: "Pollution Check Centre", category: "Automotive", keywords: [] },
+  { slug: "car-film-protection-services", name: "Car Film Protection Services", category: "Automotive", keywords: [] },
+  { slug: "car-ceramic-coating", name: "Car Ceramic Coating", category: "Automotive", keywords: [] },
+  { slug: "vehicle-tracking-services", name: "Vehicle Tracking Services", category: "Automotive", keywords: [] },
+  { slug: "car-valuation-services", name: "Car Valuation Services", category: "Automotive", keywords: [] },
+  { slug: "chauffeur-services", name: "Chauffeur Services", category: "Automotive", keywords: [] },
+  { slug: "ev-battery-services", name: "EV Battery Services", category: "Automotive", keywords: [] },
+  { slug: "ev-conversion-services", name: "EV Conversion Services", category: "Automotive", keywords: [] },
+
+  // Technology & IT
+  { slug: "computer-repair-services", name: "Computer Repair Services", category: "Technology & IT", keywords: [] },
+  { slug: "laptop-repair-services", name: "Laptop Repair Services", category: "Technology & IT", keywords: [] },
+  { slug: "mobile-repair-services", name: "Mobile Repair Services", category: "Technology & IT", keywords: [] },
+  { slug: "data-recovery-services", name: "Data Recovery Services", category: "Technology & IT", keywords: [] },
+  { slug: "networking-services", name: "Networking Services", category: "Technology & IT", keywords: [] },
+  { slug: "wifi-setup-services", name: "WiFi Setup Services", category: "Technology & IT", keywords: [] },
+  { slug: "it-infrastructure-services", name: "IT Infrastructure Services", category: "Technology & IT", keywords: [] },
+  { slug: "cloud-computing-services", name: "Cloud Computing Services", category: "Technology & IT", keywords: [] },
+  { slug: "app-development-services", name: "App Development Services", category: "Technology & IT", keywords: [] },
+  { slug: "software-development-services", name: "Software Development Services", category: "Technology & IT", keywords: [] },
+  { slug: "erp-implementation-services", name: "ERP Implementation Services", category: "Technology & IT", keywords: [] },
+  { slug: "tally-implementation-services", name: "Tally Implementation Services", category: "Technology & IT", keywords: [] },
+  { slug: "crm-implementation-services", name: "CRM Implementation Services", category: "Technology & IT", keywords: [] },
+  { slug: "cybersecurity-services", name: "Cybersecurity Services", category: "Technology & IT", keywords: [] },
+  { slug: "server-maintenance-services", name: "Server Maintenance Services", category: "Technology & IT", keywords: [] },
+  { slug: "printer-repair-services", name: "Printer Repair Services", category: "Technology & IT", keywords: [] },
+  { slug: "projector-services", name: "Projector Services", category: "Technology & IT", keywords: [] },
+  { slug: "led-screen-installation", name: "LED Screen Installation", category: "Technology & IT", keywords: [] },
+  { slug: "access-control-systems", name: "Access Control Systems", category: "Technology & IT", keywords: [] },
+  { slug: "intercom-installation", name: "Intercom Installation", category: "Technology & IT", keywords: [] },
+  { slug: "epabx-installation", name: "EPABX Installation", category: "Technology & IT", keywords: [] },
+  { slug: "video-conferencing-setup", name: "Video Conferencing Setup", category: "Technology & IT", keywords: [] },
+  { slug: "av-integration-services", name: "AV Integration Services", category: "Technology & IT", keywords: [] },
+  { slug: "ups-services", name: "UPS Services", category: "Technology & IT", keywords: [] },
+  { slug: "drone-services", name: "Drone Services", category: "Technology & IT", keywords: [] },
+  { slug: "iot-solutions", name: "IoT Solutions", category: "Technology & IT", keywords: [] },
+  { slug: "gps-tracking-installation", name: "GPS Tracking Installation", category: "Technology & IT", keywords: [] },
+  { slug: "it-consulting-services", name: "IT Consulting Services", category: "Technology & IT", keywords: [] },
+  { slug: "e-commerce-development", name: "E-Commerce Development", category: "Technology & IT", keywords: [] },
+  { slug: "seo-services", name: "SEO Services", category: "Technology & IT", keywords: [] },
+  { slug: "blockchain-consultancy", name: "Blockchain Consultancy", category: "Technology & IT", keywords: [] },
+  { slug: "ai-ml-services", name: "AI & ML Services", category: "Technology & IT", keywords: [] },
+  { slug: "chatbot-development", name: "Chatbot Development", category: "Technology & IT", keywords: [] },
+  { slug: "ui-ux-design-services", name: "UI/UX Design Services", category: "Technology & IT", keywords: [] },
+  { slug: "data-analytics-services", name: "Data Analytics Services", category: "Technology & IT", keywords: [] },
+  { slug: "cloud-migration-services", name: "Cloud Migration Services", category: "Technology & IT", keywords: [] },
+  { slug: "digital-signage-solutions", name: "Digital Signage Solutions", category: "Technology & IT", keywords: [] },
+  { slug: "cybersecurity-training", name: "Cybersecurity Training", category: "Technology & IT", keywords: [] },
+
+  // Financial Services
+  { slug: "mutual-fund-advisors", name: "Mutual Fund Advisors", category: "Financial Services", keywords: [] },
+  { slug: "stock-broker-services", name: "Stock Broker Services", category: "Financial Services", keywords: [] },
+  { slug: "tax-filing-services", name: "Tax Filing Services", category: "Financial Services", keywords: [] },
+  { slug: "payroll-services", name: "Payroll Services", category: "Financial Services", keywords: [] },
+  { slug: "bookkeeping-services", name: "Bookkeeping Services", category: "Financial Services", keywords: [] },
+  { slug: "audit-services", name: "Audit Services", category: "Financial Services", keywords: [] },
+  { slug: "financial-planning-services", name: "Financial Planning Services", category: "Financial Services", keywords: [] },
+  { slug: "retirement-planning-services", name: "Retirement Planning Services", category: "Financial Services", keywords: [] },
+  { slug: "business-valuation-services", name: "Business Valuation Services", category: "Financial Services", keywords: [] },
+  { slug: "msme-loan-services", name: "MSME Loan Services", category: "Financial Services", keywords: [] },
+  { slug: "education-loan-services", name: "Education Loan Services", category: "Financial Services", keywords: [] },
+  { slug: "gold-loan-services", name: "Gold Loan Services", category: "Financial Services", keywords: [] },
+  { slug: "nri-financial-services", name: "NRI Financial Services", category: "Financial Services", keywords: [] },
+  { slug: "working-capital-finance", name: "Working Capital Finance", category: "Financial Services", keywords: [] },
+  { slug: "investment-advisory-services", name: "Investment Advisory Services", category: "Financial Services", keywords: [] },
+  { slug: "wealth-management-services", name: "Wealth Management Services", category: "Financial Services", keywords: [] },
+  { slug: "life-insurance-services", name: "Life Insurance Services", category: "Financial Services", keywords: [] },
+  { slug: "health-insurance-services", name: "Health Insurance Services", category: "Financial Services", keywords: [] },
+  { slug: "property-insurance-services", name: "Property Insurance Services", category: "Financial Services", keywords: [] },
+  { slug: "business-insurance-services", name: "Business Insurance Services", category: "Financial Services", keywords: [] },
+  { slug: "share-market-training", name: "Share Market Training", category: "Financial Services", keywords: [] },
+  { slug: "foreign-exchange-services", name: "Foreign Exchange Services", category: "Financial Services", keywords: [] },
+  { slug: "microfinance-services", name: "Microfinance Services", category: "Financial Services", keywords: [] },
+  { slug: "money-transfer-services", name: "Money Transfer Services", category: "Financial Services", keywords: [] },
+  { slug: "fixed-deposit-advisory", name: "Fixed Deposit Advisory", category: "Financial Services", keywords: [] },
+
+  // Legal & Compliance
+  { slug: "criminal-lawyer-services", name: "Criminal Lawyer Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "civil-lawyer-services", name: "Civil Lawyer Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "corporate-lawyer-services", name: "Corporate Lawyer Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "family-lawyer-services", name: "Family Lawyer Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "divorce-lawyer-services", name: "Divorce Lawyer Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "immigration-lawyer-services", name: "Immigration Lawyer Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "patent-registration-services", name: "Patent Registration Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "copyright-registration-services", name: "Copyright Registration Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "fssai-registration-services", name: "FSSAI Registration Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "msme-registration-services", name: "MSME Registration Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "shop-act-registration", name: "Shop Act Registration", category: "Legal & Compliance", keywords: [] },
+  { slug: "pf-esi-registration", name: "PF & ESI Registration", category: "Legal & Compliance", keywords: [] },
+  { slug: "labour-law-compliance", name: "Labour Law Compliance", category: "Legal & Compliance", keywords: [] },
+  { slug: "rera-consultancy", name: "RERA Consultancy", category: "Legal & Compliance", keywords: [] },
+  { slug: "notary-services", name: "Notary Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "document-attestation-services", name: "Document Attestation Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "apostille-services", name: "Apostille Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "will-writing-services", name: "Will Writing Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "drug-license-consultancy", name: "Drug License Consultancy", category: "Legal & Compliance", keywords: [] },
+  { slug: "consumer-court-lawyer", name: "Consumer Court Lawyer", category: "Legal & Compliance", keywords: [] },
+  { slug: "arbitration-services", name: "Arbitration Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "mediation-services", name: "Mediation Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "cyber-crime-lawyer", name: "Cyber Crime Lawyer", category: "Legal & Compliance", keywords: [] },
+  { slug: "property-registration-services", name: "Property Registration Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "court-marriage-services", name: "Court Marriage Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "fire-noc-services", name: "Fire NOC Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "building-plan-approval", name: "Building Plan Approval Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "power-of-attorney-services", name: "Power of Attorney Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "legal-notice-services", name: "Legal Notice Services", category: "Legal & Compliance", keywords: [] },
+  { slug: "land-title-search-services", name: "Land Title Search Services", category: "Legal & Compliance", keywords: [] },
+
+  // Events & Entertainment
+  { slug: "birthday-party-planning", name: "Birthday Party Planning", category: "Events & Entertainment", keywords: [] },
+  { slug: "kids-party-planning", name: "Kids Party Planning", category: "Events & Entertainment", keywords: [] },
+  { slug: "corporate-team-building", name: "Corporate Team Building", category: "Events & Entertainment", keywords: [] },
+  { slug: "conference-management-services", name: "Conference Management Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "exhibition-management-services", name: "Exhibition Management Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "stall-design-fabrication", name: "Stall Design & Fabrication", category: "Events & Entertainment", keywords: [] },
+  { slug: "product-launch-event-services", name: "Product Launch Event Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "mehendi-ceremony-planning", name: "Mehendi Ceremony Planning", category: "Events & Entertainment", keywords: [] },
+  { slug: "engagement-ceremony-planning", name: "Engagement Ceremony Planning", category: "Events & Entertainment", keywords: [] },
+  { slug: "anniversary-party-planning", name: "Anniversary Party Planning", category: "Events & Entertainment", keywords: [] },
+  { slug: "baby-shower-planning", name: "Baby Shower Planning", category: "Events & Entertainment", keywords: [] },
+  { slug: "naming-ceremony-planning", name: "Naming Ceremony Planning", category: "Events & Entertainment", keywords: [] },
+  { slug: "dj-services", name: "DJ Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "live-band-services", name: "Live Band Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "orchestra-services", name: "Orchestra Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "magic-show-services", name: "Magic Show Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "photo-booth-rental", name: "Photo Booth Rental", category: "Events & Entertainment", keywords: [] },
+  { slug: "drone-photography-services", name: "Drone Photography Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "photo-editing-services", name: "Photo Editing Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "video-editing-services", name: "Video Editing Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "balloon-decoration-services", name: "Balloon Decoration Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "flower-decoration-services", name: "Flower Decoration Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "stage-decoration-services", name: "Stage Decoration Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "invitation-card-design", name: "Invitation Card Design", category: "Events & Entertainment", keywords: [] },
+  { slug: "tent-house-services", name: "Tent House Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "chair-table-rental", name: "Chair & Table Rental", category: "Events & Entertainment", keywords: [] },
+  { slug: "wedding-car-decoration", name: "Wedding Car Decoration", category: "Events & Entertainment", keywords: [] },
+  { slug: "fireworks-services", name: "Fireworks Services", category: "Events & Entertainment", keywords: [] },
+  { slug: "fashion-show-management", name: "Fashion Show Management", category: "Events & Entertainment", keywords: [] },
+  { slug: "cultural-event-management", name: "Cultural Event Management", category: "Events & Entertainment", keywords: [] },
+  { slug: "sports-event-management", name: "Sports Event Management", category: "Events & Entertainment", keywords: [] },
+  { slug: "musical-concert-management", name: "Musical Concert Management", category: "Events & Entertainment", keywords: [] },
+  { slug: "celebrity-management-services", name: "Celebrity Management Services", category: "Events & Entertainment", keywords: [] },
+
+  // Travel & Tourism
+  { slug: "travel-agency-services", name: "Travel Agency Services", category: "Travel & Tourism", keywords: [] },
+  { slug: "pilgrimage-tour-packages", name: "Pilgrimage Tour Packages", category: "Travel & Tourism", keywords: [] },
+  { slug: "gujarat-tour-packages", name: "Gujarat Tour Packages", category: "Travel & Tourism", keywords: [] },
+  { slug: "honeymoon-tour-packages", name: "Honeymoon Tour Packages", category: "Travel & Tourism", keywords: [] },
+  { slug: "rajasthan-tour-packages", name: "Rajasthan Tour Packages", category: "Travel & Tourism", keywords: [] },
+  { slug: "goa-tour-packages", name: "Goa Tour Packages", category: "Travel & Tourism", keywords: [] },
+  { slug: "international-tour-packages", name: "International Tour Packages", category: "Travel & Tourism", keywords: [] },
+  { slug: "visa-consultancy-services", name: "Visa Consultancy Services", category: "Travel & Tourism", keywords: [] },
+  { slug: "passport-assistance-services", name: "Passport Assistance Services", category: "Travel & Tourism", keywords: [] },
+  { slug: "hotel-booking-services", name: "Hotel Booking Services", category: "Travel & Tourism", keywords: [] },
+  { slug: "bus-rental-services", name: "Bus Rental Services", category: "Travel & Tourism", keywords: [] },
+  { slug: "van-rental-services", name: "Van Rental Services", category: "Travel & Tourism", keywords: [] },
+  { slug: "outstation-cab-services", name: "Outstation Cab Services", category: "Travel & Tourism", keywords: [] },
+  { slug: "travel-insurance-services", name: "Travel Insurance Services", category: "Travel & Tourism", keywords: [] },
+  { slug: "corporate-travel-management", name: "Corporate Travel Management", category: "Travel & Tourism", keywords: [] },
+  { slug: "adventure-tour-packages", name: "Adventure Tour Packages", category: "Travel & Tourism", keywords: [] },
+  { slug: "school-picnic-packages", name: "School Picnic Packages", category: "Travel & Tourism", keywords: [] },
+  { slug: "airport-transfer-services", name: "Airport Transfer Services", category: "Travel & Tourism", keywords: [] },
+
+  // Business Services
+  { slug: "manpower-recruitment-services", name: "Manpower Recruitment Services", category: "Business Services", keywords: [] },
+  { slug: "staffing-services", name: "Staffing Services", category: "Business Services", keywords: [] },
+  { slug: "placement-consultancy", name: "Placement Consultancy", category: "Business Services", keywords: [] },
+  { slug: "executive-search-services", name: "Executive Search Services", category: "Business Services", keywords: [] },
+  { slug: "hr-consulting-services", name: "HR Consulting Services", category: "Business Services", keywords: [] },
+  { slug: "background-verification-services", name: "Background Verification Services", category: "Business Services", keywords: [] },
+  { slug: "housekeeping-staff-supply", name: "Housekeeping Staff Supply", category: "Business Services", keywords: [] },
+  { slug: "driver-supply-services", name: "Driver Supply Services", category: "Business Services", keywords: [] },
+  { slug: "domestic-help-services", name: "Domestic Help Services", category: "Business Services", keywords: [] },
+  { slug: "babysitter-services", name: "Babysitter Services", category: "Business Services", keywords: [] },
+  { slug: "labour-contractor-services", name: "Labour Contractor Services", category: "Business Services", keywords: [] },
+  { slug: "payroll-outsourcing-services", name: "Payroll Outsourcing Services", category: "Business Services", keywords: [] },
+  { slug: "data-entry-services", name: "Data Entry Services", category: "Business Services", keywords: [] },
+  { slug: "virtual-assistant-services", name: "Virtual Assistant Services", category: "Business Services", keywords: [] },
+  { slug: "call-center-services", name: "Call Center Services", category: "Business Services", keywords: [] },
+  { slug: "translation-services", name: "Translation Services", category: "Business Services", keywords: [] },
+  { slug: "business-consulting-services", name: "Business Consulting Services", category: "Business Services", keywords: [] },
+  { slug: "startup-consultancy", name: "Startup Consultancy", category: "Business Services", keywords: [] },
+  { slug: "franchise-consultancy", name: "Franchise Consultancy", category: "Business Services", keywords: [] },
+  { slug: "tender-filing-services", name: "Tender Filing Services", category: "Business Services", keywords: [] },
+  { slug: "import-export-consultancy", name: "Import Export Consultancy", category: "Business Services", keywords: [] },
+
+  // Media & Marketing
+  { slug: "product-photography", name: "Product Photography", category: "Media & Marketing", keywords: [] },
+  { slug: "real-estate-photography", name: "Real Estate Photography", category: "Media & Marketing", keywords: [] },
+  { slug: "food-photography", name: "Food Photography", category: "Media & Marketing", keywords: [] },
+  { slug: "social-media-marketing", name: "Social Media Marketing", category: "Media & Marketing", keywords: [] },
+  { slug: "ppc-advertising-services", name: "PPC Advertising Services", category: "Media & Marketing", keywords: [] },
+  { slug: "email-marketing-services", name: "Email Marketing Services", category: "Media & Marketing", keywords: [] },
+  { slug: "content-writing-services", name: "Content Writing Services", category: "Media & Marketing", keywords: [] },
+  { slug: "copywriting-services", name: "Copywriting Services", category: "Media & Marketing", keywords: [] },
+  { slug: "logo-design-services", name: "Logo Design Services", category: "Media & Marketing", keywords: [] },
+  { slug: "brand-identity-design", name: "Brand Identity Design", category: "Media & Marketing", keywords: [] },
+  { slug: "packaging-design-services", name: "Packaging Design Services", category: "Media & Marketing", keywords: [] },
+  { slug: "graphic-design-services", name: "Graphic Design Services", category: "Media & Marketing", keywords: [] },
+  { slug: "video-production-services", name: "Video Production Services", category: "Media & Marketing", keywords: [] },
+  { slug: "animation-services", name: "Animation Services", category: "Media & Marketing", keywords: [] },
+  { slug: "outdoor-advertising-services", name: "Outdoor Advertising Services", category: "Media & Marketing", keywords: [] },
+  { slug: "led-hoarding-services", name: "LED Hoarding Services", category: "Media & Marketing", keywords: [] },
+  { slug: "flex-printing-services", name: "Flex Printing Services", category: "Media & Marketing", keywords: [] },
+  { slug: "banner-printing-services", name: "Banner Printing Services", category: "Media & Marketing", keywords: [] },
+  { slug: "brochure-design-printing", name: "Brochure Design & Printing", category: "Media & Marketing", keywords: [] },
+  { slug: "catalogue-design-services", name: "Catalogue Design Services", category: "Media & Marketing", keywords: [] },
+  { slug: "signage-services", name: "Signage Services", category: "Media & Marketing", keywords: [] },
+  { slug: "vehicle-branding-services", name: "Vehicle Branding Services", category: "Media & Marketing", keywords: [] },
+  { slug: "corporate-gifting-services", name: "Corporate Gifting Services", category: "Media & Marketing", keywords: [] },
+  { slug: "influencer-marketing-services", name: "Influencer Marketing Services", category: "Media & Marketing", keywords: [] },
+  { slug: "youtube-channel-management", name: "YouTube Channel Management", category: "Media & Marketing", keywords: [] },
+  { slug: "public-relations-services", name: "Public Relations Services", category: "Media & Marketing", keywords: [] },
+  { slug: "event-photography", name: "Event Photography", category: "Media & Marketing", keywords: [] },
+  { slug: "maternity-photography", name: "Maternity Photography", category: "Media & Marketing", keywords: [] },
+  { slug: "newborn-photography", name: "Newborn Photography", category: "Media & Marketing", keywords: [] },
+  { slug: "family-portrait-photography", name: "Family Portrait Photography", category: "Media & Marketing", keywords: [] },
+  { slug: "corporate-video-production", name: "Corporate Video Production", category: "Media & Marketing", keywords: [] },
+
+  // Logistics & Transport
+  { slug: "courier-services", name: "Courier Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "same-day-delivery-services", name: "Same Day Delivery Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "cold-chain-logistics", name: "Cold Chain Logistics", category: "Logistics & Transport", keywords: [] },
+  { slug: "furniture-transport-services", name: "Furniture Transport Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "car-transport-services", name: "Car Transport Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "bike-transport-services", name: "Bike Transport Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "office-relocation-services", name: "Office Relocation Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "warehousing-services", name: "Warehousing Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "mini-truck-rental", name: "Mini Truck Rental", category: "Logistics & Transport", keywords: [] },
+  { slug: "tempo-rental-services", name: "Tempo Rental Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "ecommerce-logistics-services", name: "E-Commerce Logistics Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "loading-unloading-services", name: "Loading & Unloading Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "air-freight-services", name: "Air Freight Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "sea-freight-services", name: "Sea Freight Services", category: "Logistics & Transport", keywords: [] },
+  { slug: "door-to-door-delivery", name: "Door to Door Delivery", category: "Logistics & Transport", keywords: [] },
+
+  // Agriculture & Environment
+  { slug: "drip-irrigation-installation", name: "Drip Irrigation Installation", category: "Agriculture & Environment", keywords: [] },
+  { slug: "greenhouse-construction", name: "Greenhouse Construction", category: "Agriculture & Environment", keywords: [] },
+  { slug: "polyhouse-construction", name: "Polyhouse Construction", category: "Agriculture & Environment", keywords: [] },
+  { slug: "vermicompost-services", name: "Vermicompost Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "organic-farming-consultancy", name: "Organic Farming Consultancy", category: "Agriculture & Environment", keywords: [] },
+  { slug: "drone-spraying-services", name: "Drone Spraying Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "agricultural-consultancy", name: "Agricultural Consultancy", category: "Agriculture & Environment", keywords: [] },
+  { slug: "plant-rental-services", name: "Plant Rental Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "indoor-plant-services", name: "Indoor Plant Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "vertical-garden-installation", name: "Vertical Garden Installation", category: "Agriculture & Environment", keywords: [] },
+  { slug: "hydroponics-setup-services", name: "Hydroponics Setup Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "nursery-services", name: "Nursery Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "plantation-services", name: "Plantation Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "horticulture-services", name: "Horticulture Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "waste-management-services", name: "Waste Management Services", category: "Agriculture & Environment", keywords: [] },
+  { slug: "composting-services", name: "Composting Services", category: "Agriculture & Environment", keywords: [] },
+
+  // Real Estate
+  { slug: "residential-property-dealers", name: "Residential Property Dealers", category: "Real Estate", keywords: [] },
+  { slug: "plot-dealers", name: "Plot Dealers", category: "Real Estate", keywords: [] },
+  { slug: "farmhouse-dealers", name: "Farmhouse Dealers", category: "Real Estate", keywords: [] },
+  { slug: "co-working-space-services", name: "Co-Working Space Services", category: "Real Estate", keywords: [] },
+  { slug: "serviced-apartment-services", name: "Serviced Apartment Services", category: "Real Estate", keywords: [] },
+  { slug: "pg-accommodation-services", name: "PG Accommodation Services", category: "Real Estate", keywords: [] },
+  { slug: "hostel-management-services", name: "Hostel Management Services", category: "Real Estate", keywords: [] },
+  { slug: "property-tax-consultancy", name: "Property Tax Consultancy", category: "Real Estate", keywords: [] },
+  { slug: "rental-property-management", name: "Rental Property Management", category: "Real Estate", keywords: [] },
+  { slug: "housing-society-management", name: "Housing Society Management", category: "Real Estate", keywords: [] },
+  { slug: "rera-agent-services", name: "RERA Agent Services", category: "Real Estate", keywords: [] },
+  { slug: "interior-turnkey-services", name: "Interior Turnkey Services", category: "Real Estate", keywords: [] },
+  { slug: "civil-turnkey-services", name: "Civil Turnkey Services", category: "Real Estate", keywords: [] },
+
+  // Spiritual & Wellness
+  { slug: "meditation-centre", name: "Meditation Centre", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "reiki-healing-services", name: "Reiki Healing Services", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "tarot-card-reading", name: "Tarot Card Reading", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "spiritual-counseling-services", name: "Spiritual Counseling Services", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "pandit-priest-services", name: "Pandit & Priest Services", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "pooja-arrangement-services", name: "Pooja Arrangement Services", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "havan-services", name: "Havan Services", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "life-coaching-services", name: "Life Coaching Services", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "mindfulness-training", name: "Mindfulness Training", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "stress-management-services", name: "Stress Management Services", category: "Spiritual & Wellness", keywords: [] },
+  { slug: "sound-healing-services", name: "Sound Healing Services", category: "Spiritual & Wellness", keywords: [] },
+
+  // Pet Services
+  { slug: "pet-food-delivery", name: "Pet Food Delivery", category: "Pet Services", keywords: [] },
+  { slug: "aquarium-services", name: "Aquarium Services", category: "Pet Services", keywords: [] },
+  { slug: "dog-training-services", name: "Dog Training Services", category: "Pet Services", keywords: [] },
+  { slug: "pet-photography", name: "Pet Photography", category: "Pet Services", keywords: [] },
+  { slug: "pet-taxi-services", name: "Pet Taxi Services", category: "Pet Services", keywords: [] },
+  { slug: "pet-daycare-services", name: "Pet Daycare Services", category: "Pet Services", keywords: [] },
+  { slug: "veterinary-home-visit", name: "Veterinary Home Visit", category: "Pet Services", keywords: [] },
+  { slug: "pet-accessories-shop", name: "Pet Accessories Shop", category: "Pet Services", keywords: [] },
+
+  // Fashion & Tailoring
+  { slug: "ladies-tailoring-services", name: "Ladies Tailoring Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "gents-tailoring-services", name: "Gents Tailoring Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "blouse-stitching-services", name: "Blouse Stitching Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "alteration-services", name: "Alteration Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "fashion-designing-services", name: "Fashion Designing Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "embroidery-services", name: "Embroidery Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "saree-draping-services", name: "Saree Draping Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "sherwani-rental-services", name: "Sherwani Rental Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "lehenga-rental-services", name: "Lehenga Rental Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "jewelry-repair-services", name: "Jewelry Repair Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "watch-repair-services", name: "Watch Repair Services", category: "Fashion & Tailoring", keywords: [] },
+  { slug: "shoe-repair-services", name: "Shoe Repair Services", category: "Fashion & Tailoring", keywords: [] },
+
+  // Textile & Garment
+  { slug: "saree-manufacturing", name: "Saree Manufacturing", category: "Textile & Garment", keywords: [] },
+  { slug: "textile-printing-services", name: "Textile Printing Services", category: "Textile & Garment", keywords: [] },
+  { slug: "fabric-dyeing-services", name: "Fabric Dyeing Services", category: "Textile & Garment", keywords: [] },
+  { slug: "garment-manufacturing", name: "Garment Manufacturing", category: "Textile & Garment", keywords: [] },
+  { slug: "uniform-manufacturing", name: "Uniform Manufacturing", category: "Textile & Garment", keywords: [] },
+  { slug: "screen-printing-services", name: "Screen Printing Services", category: "Textile & Garment", keywords: [] },
+  { slug: "digital-fabric-printing", name: "Digital Fabric Printing", category: "Textile & Garment", keywords: [] },
+  { slug: "fabric-wholesale-dealers", name: "Fabric Wholesale Dealers", category: "Textile & Garment", keywords: [] },
+  { slug: "garment-export-services", name: "Garment Export Services", category: "Textile & Garment", keywords: [] },
+  { slug: "textile-design-services", name: "Textile Design Services", category: "Textile & Garment", keywords: [] },
+
+  // Hardware & Tools
+  { slug: "hardware-shop-services", name: "Hardware Shop Services", category: "Hardware & Tools", keywords: [] },
+  { slug: "tool-rental-services", name: "Tool Rental Services", category: "Hardware & Tools", keywords: [] },
+  { slug: "scaffolding-rental", name: "Scaffolding Rental", category: "Hardware & Tools", keywords: [] },
+  { slug: "equipment-rental-services", name: "Equipment Rental Services", category: "Hardware & Tools", keywords: [] },
+  { slug: "sanitary-ware-dealers", name: "Sanitary Ware Dealers", category: "Hardware & Tools", keywords: [] },
+  { slug: "bathroom-fittings-dealers", name: "Bathroom Fittings Dealers", category: "Hardware & Tools", keywords: [] },
+  { slug: "electrical-material-suppliers", name: "Electrical Material Suppliers", category: "Hardware & Tools", keywords: [] },
+  { slug: "plumbing-material-suppliers", name: "Plumbing Material Suppliers", category: "Hardware & Tools", keywords: [] },
+  { slug: "pvc-pipe-suppliers", name: "PVC Pipe Suppliers", category: "Hardware & Tools", keywords: [] },
+  { slug: "wire-cable-suppliers", name: "Wire & Cable Suppliers", category: "Hardware & Tools", keywords: [] },
+  { slug: "lock-key-services", name: "Lock & Key Services", category: "Hardware & Tools", keywords: [] },
+
+  // Security Services
+  { slug: "alarm-system-installation", name: "Alarm System Installation", category: "Security Services", keywords: [] },
+  { slug: "fire-alarm-installation", name: "Fire Alarm Installation", category: "Security Services", keywords: [] },
+  { slug: "video-doorbell-installation", name: "Video Doorbell Installation", category: "Security Services", keywords: [] },
+  { slug: "biometric-system-installation", name: "Biometric System Installation", category: "Security Services", keywords: [] },
+  { slug: "boom-barrier-installation", name: "Boom Barrier Installation", category: "Security Services", keywords: [] },
+  { slug: "event-security-services", name: "Event Security Services", category: "Security Services", keywords: [] },
+
+  // Sports & Recreation
+  { slug: "sports-equipment-dealers", name: "Sports Equipment Dealers", category: "Sports & Recreation", keywords: [] },
+  { slug: "cricket-net-installation", name: "Cricket Net Installation", category: "Sports & Recreation", keywords: [] },
+  { slug: "gym-equipment-dealers", name: "Gym Equipment Dealers", category: "Sports & Recreation", keywords: [] },
+  { slug: "boxing-coaching", name: "Boxing Coaching", category: "Sports & Recreation", keywords: [] },
+  { slug: "yoga-retreat-services", name: "Yoga Retreat Services", category: "Sports & Recreation", keywords: [] },
+  { slug: "sports-physiotherapy", name: "Sports Physiotherapy", category: "Sports & Recreation", keywords: [] },
+  { slug: "zumba-classes", name: "Zumba Classes", category: "Sports & Recreation", keywords: [] },
+  { slug: "aerobics-classes", name: "Aerobics Classes", category: "Sports & Recreation", keywords: [] },
+  { slug: "crossfit-training", name: "CrossFit Training", category: "Sports & Recreation", keywords: [] },
+  { slug: "pilates-classes", name: "Pilates Classes", category: "Sports & Recreation", keywords: [] },
+
+  // Government & Documentation
+  { slug: "pan-card-services", name: "PAN Card Services", category: "Government & Documentation", keywords: [] },
+  { slug: "voter-id-services", name: "Voter ID Services", category: "Government & Documentation", keywords: [] },
+  { slug: "driving-licence-services", name: "Driving Licence Services", category: "Government & Documentation", keywords: [] },
+  { slug: "birth-certificate-services", name: "Birth Certificate Services", category: "Government & Documentation", keywords: [] },
+  { slug: "caste-certificate-services", name: "Caste Certificate Services", category: "Government & Documentation", keywords: [] },
+  { slug: "income-certificate-services", name: "Income Certificate Services", category: "Government & Documentation", keywords: [] },
+  { slug: "e-stamp-services", name: "E-Stamp Services", category: "Government & Documentation", keywords: [] },
+  { slug: "police-clearance-certificate", name: "Police Clearance Certificate", category: "Government & Documentation", keywords: [] },
+  { slug: "affidavit-services", name: "Affidavit Services", category: "Government & Documentation", keywords: [] },
+  { slug: "name-change-services", name: "Name Change Services", category: "Government & Documentation", keywords: [] },
+  { slug: "gazette-notification-services", name: "Gazette Notification Services", category: "Government & Documentation", keywords: [] },
+  { slug: "nagarpalika-tax-services", name: "Nagarpalika Tax Services", category: "Government & Documentation", keywords: [] },
+  { slug: "property-mutation-services", name: "Property Mutation Services", category: "Government & Documentation", keywords: [] },
+  { slug: "gujrera-registration", name: "GujRERA Registration Services", category: "Government & Documentation", keywords: [] },
+
+  // Construction
+  { slug: "paver-block-installation", name: "Paver Block Installation", category: "Construction", keywords: [] },
+  { slug: "parking-lot-construction", name: "Parking Lot Construction", category: "Construction", keywords: [] },
+  { slug: "boundary-wall-construction", name: "Boundary Wall Construction", category: "Construction", keywords: [] },
+  { slug: "swimming-pool-renovation", name: "Swimming Pool Renovation", category: "Construction", keywords: [] },
+  { slug: "sports-court-construction", name: "Sports Court Construction", category: "Construction", keywords: [] },
+  { slug: "high-rise-building-construction", name: "High Rise Building Construction", category: "Construction", keywords: [] },
+  { slug: "cold-storage-construction", name: "Cold Storage Construction", category: "Construction", keywords: [] },
+  { slug: "hospital-construction-services", name: "Hospital Construction Services", category: "Construction", keywords: [] },
+  { slug: "school-building-construction", name: "School Building Construction", category: "Construction", keywords: [] },
+  { slug: "concrete-cutting-services", name: "Concrete Cutting Services", category: "Construction", keywords: [] },
+  { slug: "site-survey-services", name: "Site Survey Services", category: "Construction", keywords: [] },
+  { slug: "building-permit-services", name: "Building Permit Services", category: "Construction", keywords: [] },
+  { slug: "geotechnical-services", name: "Geotechnical Services", category: "Construction", keywords: [] },
+  { slug: "fire-door-installation", name: "Fire Door Installation", category: "Construction", keywords: [] },
+  { slug: "rcc-design-services", name: "RCC Design Services", category: "Construction", keywords: [] },
+
+  // Water & Sanitation
+  { slug: "water-softener-installation", name: "Water Softener Installation", category: "Water & Sanitation", keywords: [] },
+  { slug: "water-testing-services", name: "Water Testing Services", category: "Water & Sanitation", keywords: [] },
+  { slug: "water-pipeline-repair", name: "Water Pipeline Repair", category: "Water & Sanitation", keywords: [] },
+  { slug: "bore-pump-services", name: "Bore Pump Services", category: "Water & Sanitation", keywords: [] },
+  { slug: "water-tank-repair-services", name: "Water Tank Repair Services", category: "Water & Sanitation", keywords: [] },
+  { slug: "storm-water-management", name: "Storm Water Management", category: "Water & Sanitation", keywords: [] },
+  { slug: "packaged-drinking-water", name: "Packaged Drinking Water Plant", category: "Water & Sanitation", keywords: [] },
+
+  // Home Appliances
+  { slug: "dishwasher-repair-services", name: "Dishwasher Repair Services", category: "Home Appliances", keywords: [] },
+  { slug: "vacuum-cleaner-repair", name: "Vacuum Cleaner Repair", category: "Home Appliances", keywords: [] },
+  { slug: "air-cooler-repair-services", name: "Air Cooler Repair Services", category: "Home Appliances", keywords: [] },
+  { slug: "mixer-grinder-repair", name: "Mixer Grinder Repair", category: "Home Appliances", keywords: [] },
+  { slug: "induction-cooktop-repair", name: "Induction Cooktop Repair", category: "Home Appliances", keywords: [] },
+  { slug: "smart-tv-repair", name: "Smart TV Repair", category: "Home Appliances", keywords: [] },
+  { slug: "led-tv-repair", name: "LED TV Repair", category: "Home Appliances", keywords: [] },
+  { slug: "home-appliance-amc", name: "Home Appliance AMC", category: "Home Appliances", keywords: [] },
+  { slug: "water-dispenser-services", name: "Water Dispenser Services", category: "Home Appliances", keywords: [] },
+  { slug: "ceiling-fan-installation", name: "Ceiling Fan Installation", category: "Home Appliances", keywords: [] },
+  { slug: "ro-purifier-repair", name: "RO Purifier Repair", category: "Home Appliances", keywords: [] },
+
+  // Solar & Energy
+  { slug: "energy-management-services", name: "Energy Management Services", category: "Solar & Energy", keywords: [] },
+  { slug: "dg-set-installation", name: "DG Set Installation", category: "Solar & Energy", keywords: [] },
+  { slug: "battery-storage-systems", name: "Battery Storage Systems", category: "Solar & Energy", keywords: [] },
+  { slug: "led-lighting-installation", name: "LED Lighting Installation", category: "Solar & Energy", keywords: [] },
+  { slug: "street-light-installation", name: "Street Light Installation", category: "Solar & Energy", keywords: [] },
+  { slug: "power-factor-correction", name: "Power Factor Correction", category: "Solar & Energy", keywords: [] },
+
+  // Industrial
+  { slug: "pharmaceutical-manufacturing-consultancy", name: "Pharmaceutical Manufacturing Consultancy", category: "Industrial Services", keywords: [] },
+  { slug: "chemical-plant-consultancy", name: "Chemical Plant Consultancy", category: "Industrial Services", keywords: [] },
+  { slug: "non-destructive-testing", name: "Non-Destructive Testing (NDT)", category: "Industrial Services", keywords: [] },
+  { slug: "six-sigma-consultancy", name: "Six Sigma Consultancy", category: "Industrial Services", keywords: [] },
+  { slug: "lean-manufacturing-consultancy", name: "Lean Manufacturing Consultancy", category: "Industrial Services", keywords: [] },
+  { slug: "pressure-vessel-fabrication", name: "Pressure Vessel Fabrication", category: "Industrial Services", keywords: [] },
+  { slug: "heat-exchanger-services", name: "Heat Exchanger Services", category: "Industrial Services", keywords: [] },
+  { slug: "forging-services", name: "Forging Services", category: "Industrial Services", keywords: [] },
+  { slug: "die-casting-services", name: "Die Casting Services", category: "Industrial Services", keywords: [] },
+  { slug: "safety-officer-services", name: "Safety Officer Services", category: "Industrial Services", keywords: [] },
+  { slug: "fire-hydrant-installation", name: "Fire Hydrant Installation", category: "Industrial Services", keywords: [] },
+  { slug: "sprinkler-system-installation", name: "Sprinkler System Installation", category: "Industrial Services", keywords: [] },
+  { slug: "rubber-moulding-services", name: "Rubber Moulding Services", category: "Industrial Services", keywords: [] },
+  { slug: "valve-repair-services", name: "Valve Repair Services", category: "Industrial Services", keywords: [] },
+  { slug: "pump-repair-services", name: "Pump Repair Services", category: "Industrial Services", keywords: [] },
+  { slug: "dust-collection-system", name: "Dust Collection System", category: "Industrial Services", keywords: [] },
+  { slug: "industrial-rack-installation", name: "Industrial Rack Installation", category: "Industrial Services", keywords: [] },
+  { slug: "mezzanine-floor-installation", name: "Mezzanine Floor Installation", category: "Industrial Services", keywords: [] },
+  { slug: "plant-and-machinery-valuation", name: "Plant & Machinery Valuation", category: "Industrial Services", keywords: [] },
+  { slug: "cad-cam-services", name: "CAD/CAM Services", category: "Industrial Services", keywords: [] },
+  { slug: "prototyping-services", name: "Prototyping Services", category: "Industrial Services", keywords: [] },
+  { slug: "forklift-services", name: "Forklift Services", category: "Industrial Services", keywords: [] },
+  { slug: "weighbridge-services", name: "Weighbridge Services", category: "Industrial Services", keywords: [] },
+
+  // Miscellaneous
+  { slug: "photocopying-services", name: "Photocopying Services", category: "Miscellaneous", keywords: [] },
+  { slug: "lamination-services", name: "Lamination Services", category: "Miscellaneous", keywords: [] },
+  { slug: "binding-services", name: "Binding Services", category: "Miscellaneous", keywords: [] },
+  { slug: "visiting-card-printing", name: "Visiting Card Printing", category: "Miscellaneous", keywords: [] },
+  { slug: "trophy-medal-making", name: "Trophy & Medal Making", category: "Miscellaneous", keywords: [] },
+  { slug: "engraving-services", name: "Engraving Services", category: "Miscellaneous", keywords: [] },
+  { slug: "rubber-stamp-making", name: "Rubber Stamp Making", category: "Miscellaneous", keywords: [] },
+  { slug: "gift-shop-services", name: "Gift Shop Services", category: "Miscellaneous", keywords: [] },
+  { slug: "florist-services", name: "Florist Services", category: "Miscellaneous", keywords: [] },
+  { slug: "e-waste-recycling", name: "E-Waste Recycling", category: "Miscellaneous", keywords: [] },
+  { slug: "grocery-delivery-services", name: "Grocery Delivery Services", category: "Miscellaneous", keywords: [] },
+  { slug: "organic-food-delivery", name: "Organic Food Delivery", category: "Miscellaneous", keywords: [] },
+  { slug: "mineral-water-suppliers", name: "Mineral Water Suppliers", category: "Miscellaneous", keywords: [] },
+  { slug: "milk-delivery-services", name: "Milk Delivery Services", category: "Miscellaneous", keywords: [] },
+  { slug: "gas-cylinder-delivery", name: "Gas Cylinder Delivery", category: "Miscellaneous", keywords: [] },
+  { slug: "blood-test-at-home", name: "Blood Test at Home", category: "Miscellaneous", keywords: [] },
+  { slug: "dry-fruit-suppliers", name: "Dry Fruit Suppliers", category: "Miscellaneous", keywords: [] },
+  { slug: "spice-suppliers", name: "Spice Suppliers", category: "Miscellaneous", keywords: [] },
+  { slug: "cement-dealers", name: "Cement Dealers", category: "Miscellaneous", keywords: [] },
+  { slug: "tmt-bar-dealers", name: "TMT Bar Dealers", category: "Miscellaneous", keywords: [] },
+  { slug: "scrap-dealers", name: "Scrap Dealers", category: "Miscellaneous", keywords: [] },
+
+  // Health & Wellness
+  { slug: "functional-training", name: "Functional Training", category: "Health & Wellness", keywords: [] },
+  { slug: "nutrition-counseling", name: "Nutrition Counseling", category: "Health & Wellness", keywords: [] },
+  { slug: "physiotherapy-at-home", name: "Physiotherapy at Home", category: "Health & Wellness", keywords: [] },
+  { slug: "steam-sauna-services", name: "Steam & Sauna Services", category: "Health & Wellness", keywords: [] },
+  { slug: "chiropractic-services", name: "Chiropractic Services", category: "Health & Wellness", keywords: [] },
+
+  // Interior Design
+  { slug: "kids-room-interior-design", name: "Kids Room Interior Design", category: "Interior Design", keywords: [] },
+  { slug: "bedroom-interior-design", name: "Bedroom Interior Design", category: "Interior Design", keywords: [] },
+  { slug: "living-room-interior-design", name: "Living Room Interior Design", category: "Interior Design", keywords: [] },
+  { slug: "luxury-interior-design", name: "Luxury Interior Design", category: "Interior Design", keywords: [] },
+  { slug: "budget-interior-design", name: "Budget Interior Design", category: "Interior Design", keywords: [] },
+  { slug: "furniture-customization-services", name: "Furniture Customization Services", category: "Interior Design", keywords: [] },
+  { slug: "sofa-manufacturing", name: "Sofa Manufacturing", category: "Interior Design", keywords: [] },
+  { slug: "lighting-design-services", name: "Lighting Design Services", category: "Interior Design", keywords: [] },
+
+  // Professional Services
+  { slug: "management-consulting-services", name: "Management Consulting Services", category: "Professional Services", keywords: [] },
+  { slug: "risk-management-services", name: "Risk Management Services", category: "Professional Services", keywords: [] },
+  { slug: "internal-audit-services", name: "Internal Audit Services", category: "Professional Services", keywords: [] },
+  { slug: "due-diligence-services", name: "Due Diligence Services", category: "Professional Services", keywords: [] },
+  { slug: "sustainability-consultancy", name: "Sustainability Consultancy", category: "Professional Services", keywords: [] },
+  { slug: "training-development-services", name: "Training & Development Services", category: "Professional Services", keywords: [] },
+
+  // Social & Community
+  { slug: "ngo-registration-services", name: "NGO Registration Services", category: "Social & Community", keywords: [] },
+  { slug: "old-age-home-services", name: "Old Age Home Services", category: "Social & Community", keywords: [] },
+  { slug: "funeral-services", name: "Funeral Services", category: "Social & Community", keywords: [] },
+  { slug: "cremation-services", name: "Cremation Services", category: "Social & Community", keywords: [] },
+  { slug: "community-hall-booking", name: "Community Hall Booking", category: "Social & Community", keywords: [] },
+
+  // Electrical & Mechanical
+  { slug: "solar-water-heater-installation", name: "Solar Water Heater Installation", category: "Electrical & Mechanical", keywords: [] },
+  { slug: "ductable-ac-installation", name: "Ductable AC Installation", category: "Electrical & Mechanical", keywords: [] },
+  { slug: "vrv-vrf-ac-installation", name: "VRV/VRF AC Installation", category: "Electrical & Mechanical", keywords: [] },
+  { slug: "cold-room-installation", name: "Cold Room Installation", category: "Electrical & Mechanical", keywords: [] },
+  { slug: "commercial-refrigeration-services", name: "Commercial Refrigeration Services", category: "Electrical & Mechanical", keywords: [] },
+  { slug: "submersible-pump-services", name: "Submersible Pump Services", category: "Electrical & Mechanical", keywords: [] },
+  { slug: "fire-extinguisher-services", name: "Fire Extinguisher Services", category: "Electrical & Mechanical", keywords: [] },
+  { slug: "earthing-installation-services", name: "Earthing Installation Services", category: "Electrical & Mechanical", keywords: [] },
+);
+
+// Populate all keywords
+niches.forEach(n => { n.keywords = generateKeywords(n.slug); });

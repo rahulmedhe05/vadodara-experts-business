@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { slugToTitle, getRelatedNiches, withSuffix } from "@/lib/data";
+import { slugToTitle, getRelatedNiches } from "@/lib/data";
 import { vadodaraAreas, generateLongTailKeywords } from "@/lib/content";
 import { getNicheKeywordSlugs } from "@/lib/niche-keywords";
 
@@ -72,14 +72,14 @@ export default function NicheFooter({
       <section className="bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <h2 className="text-lg font-bold text-gray-800 mb-4">
-            All {withSuffix(nicheName, 'Services')} in Vadodara
+            All {nicheName} in Vadodara
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-sm">
             {keywordSlugs.map((kwSlug) => {
               const isCurrent = currentKeyword && kwSlug === currentKeyword;
               if (isCurrent) {
                 return (
-                  <span key={kwSlug} className="text-blue-800 font-semibold py-1">
+                  <span key={kwSlug} className="text-indigo-700 font-semibold py-1">
                     {slugToTitle(kwSlug.replace(/-vadodara$/, ""))} Vadodara
                   </span>
                 );
@@ -88,7 +88,7 @@ export default function NicheFooter({
                 <Link
                   key={kwSlug}
                   href={`/${nicheSlug}/${kwSlug}`}
-                  className="text-gray-600 hover:text-blue-700 no-underline py-1"
+                  className="text-gray-600 hover:text-indigo-600 no-underline py-1"
                 >
                   {slugToTitle(kwSlug.replace(/-vadodara$/, ""))} Vadodara
                 </Link>
@@ -109,7 +109,7 @@ export default function NicheFooter({
               <Link
                 key={area}
                 href={`/${nicheSlug}`}
-                className="text-gray-600 hover:text-blue-700 no-underline py-1"
+                className="text-gray-600 hover:text-indigo-600 no-underline py-1"
               >
                 {nicheName} in {area}
               </Link>
@@ -130,7 +130,7 @@ export default function NicheFooter({
                 <Link
                   key={r.slug}
                   href={`/${r.slug}`}
-                  className="text-gray-600 hover:text-blue-700 no-underline py-1"
+                  className="text-gray-600 hover:text-indigo-600 no-underline py-1"
                 >
                   {r.name} in Vadodara
                 </Link>

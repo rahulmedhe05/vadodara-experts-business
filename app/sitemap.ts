@@ -1,30 +1,31 @@
-import { getAllUrls } from "@/lib/data";
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { niches } from "@/lib/data";
+import { VADODARA_AREAS } from "@/lib/areas";
 
 const SITE = "https://vadodaraexperts.com";
-const URLS_PER_SITEMAP = 100;
+const NOW = new Date();
+const BATCH = 5000;
 
-// Generate multiple sitemaps: /sitemap/0.xml, /sitemap/1.xml, etc.
-// Next.js automatically creates /sitemap.xml as the index
-export async function generateSitemaps() {
-  const urls = getAllUrls();
-  const totalSitemaps = Math.ceil(urls.length / URLS_PER_SITEMAP);
-  return Array.from({ length: totalSitemaps }, (_, i) => ({ id: i }));
+function buildAllUrls(): string[] {
+  const urls: string[] = ["/", "/about", "/contact"];
+  for (const n of niches) urls.push(`/${n.slug}`);
+  for (const n of niches) for (const kw of n.keywords) urls.push(`/${n.slug}/${kw}`);
+  for (const area of VADODARA_AREAS) for (const n of niches) urls.push(`/${area.slug}/${n.slug}`);
+  return urls;
 }
 
-export default async function sitemap({
-  id,
-}: {
-  id: number;
-}): Promise<MetadataRoute.Sitemap> {
-  const urls = getAllUrls();
-  const start = id * URLS_PER_SITEMAP;
-  const batch = urls.slice(start, start + URLS_PER_SITEMAP);
+export async function generateSitemaps() {
+  const count = Math.ceil(buildAllUrls().length / BATCH);
+  return Array.from({ length: count }, (_, i) => ({ id: i }));
+}
 
-  return batch.map((url) => ({
+export default async function sitemap({ id }: { id: number }): Promise<MetadataRoute.Sitemap> {
+  const all = buildAllUrls();
+  const slice = all.slice(id * BATCH, (id + 1) * BATCH);
+  return slice.map((url) => ({
     url: `${SITE}${url}`,
-    lastModified: new Date(),
-    changeFrequency: url === "/" ? "daily" : ("weekly" as const),
+    lastModified: NOW,
+    changeFrequency: (url === "/" ? "daily" : url.split("/").length === 2 ? "weekly" : "monthly") as "daily" | "weekly" | "monthly",
     priority: url === "/" ? 1.0 : url.split("/").length === 2 ? 0.8 : 0.6,
   }));
 }

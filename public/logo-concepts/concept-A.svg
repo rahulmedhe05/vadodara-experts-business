@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- Concept A: Royal Shield - Sophisticated & Professional -->
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background label -->
+  <rect width="400" height="200" rx="12" fill="#f8fafc"/>
+  <text x="200" y="192" text-anchor="middle" font-family="Arial" font-size="10" fill="#94a3b8">Option A — Royal Shield</text>
+
+  <!-- Shield shape -->
+  <path d="M 60 30 L 120 30 L 120 95 Q 90 115 60 95 Z" fill="url(#shieldGrad)"/>
+  <path d="M 63 34 L 117 34 L 117 92 Q 90 110 63 92 Z" fill="none" stroke="#fbbf24" stroke-width="1.5"/>
+  <!-- VE inside shield -->
+  <text x="90" y="82" text-anchor="middle" font-family="Georgia,serif" font-weight="700" font-size="28" fill="#ffffff">VE</text>
+
+  <!-- Wordmark next to shield -->
+  <text x="145" y="72" font-family="Georgia,serif" font-weight="700" font-size="26" fill="#1e3a8a">Vadodara</text>
+  <text x="145" y="100" font-family="Georgia,serif" font-weight="400" font-size="22" fill="#f59e0b" letter-spacing="3">EXPERTS</text>
+  <line x1="145" y1="107" x2="320" y2="107" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="145" y="120" font-family="Arial" font-size="9" fill="#64748b" letter-spacing="2">YOUR CITY. YOUR EXPERTS.</text>
+</svg>

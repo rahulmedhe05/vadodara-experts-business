@@ -47,6 +47,17 @@ export default function RootLayout({
         <header className="header">
           <nav className="header-nav">
             <Link href="/" className="logo">
+              <svg width="42" height="42" viewBox="0 0 32 32" style={{display:"inline-block",verticalAlign:"middle",marginRight:"10px",flexShrink:0}} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="hg-h" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#4f46e5"/>
+                    <stop offset="100%" stopColor="#7c3aed"/>
+                  </linearGradient>
+                </defs>
+                <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="url(#hg-h)"/>
+                <polygon points="16,3.5 27,9.75 27,22.25 16,28.5 5,22.25 5,9.75" fill="none" stroke="#06b6d4" strokeWidth="1"/>
+                <text x="16" y="21" textAnchor="middle" fontFamily="Arial Black,Arial,sans-serif" fontWeight="900" fontSize="11" fill="#ffffff" letterSpacing="-0.5">VE</text>
+              </svg>
               Vadodara<span className="logo-accent">Experts</span>
             </Link>
             <div className="nav-links">
@@ -69,6 +80,17 @@ export default function RootLayout({
               {/* Brand Column */}
               <div className="footer-brand">
                 <Link href="/" className="footer-logo">
+                  <svg width="28" height="28" viewBox="0 0 32 32" style={{display:"inline-block",verticalAlign:"middle",marginRight:"8px",flexShrink:0}} xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="hg-f" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#4f46e5"/>
+                        <stop offset="100%" stopColor="#7c3aed"/>
+                      </linearGradient>
+                    </defs>
+                    <polygon points="16,1 29,8.5 29,23.5 16,31 3,23.5 3,8.5" fill="url(#hg-f)"/>
+                    <polygon points="16,3.5 27,9.75 27,22.25 16,28.5 5,22.25 5,9.75" fill="none" stroke="#06b6d4" strokeWidth="1"/>
+                    <text x="16" y="21" textAnchor="middle" fontFamily="Arial Black,Arial,sans-serif" fontWeight="900" fontSize="11" fill="#ffffff" letterSpacing="-0.5">VE</text>
+                  </svg>
                   Vadodara<span className="logo-accent">Experts</span>
                 </Link>
                 <p className="footer-brand-desc">
