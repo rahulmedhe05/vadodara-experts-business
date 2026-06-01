@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { niches } from "@/lib/data";
+import { VADODARA_AREAS } from "@/lib/areas";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "VadodaraExperts — Premium Professional Services in Vadodara",
   description:
-    "VadodaraExperts delivers professional services across 200+ categories in Vadodara. Quality work, expert teams, guaranteed satisfaction.",
+    "Best professional services in Vadodara. 956+ services, certified experts, same-day service. Free estimate!",
   metadataBase: new URL("https://vadodaraexperts.com"),
   openGraph: {
     siteName: "VadodaraExperts",
@@ -15,14 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-const FOOTER_AREAS = [
-  "Alkapuri", "Akota", "Ajwa Road", "Atladara", "Bill", "Chhani",
-  "Dabhoi Road", "Fatehgunj", "GIDC Makarpura", "Gorwa", "Gotri",
-  "Halol Road", "Harni", "Karelibaug", "Manjalpur", "Makarpura",
-  "Nandesari", "Nizampura", "Old Padra Road", "Padra Road", "Race Course",
-  "Raopura", "Sama", "Savli Road", "Sayajigunj", "Subhanpura",
-  "Tandalja", "Tarsali", "Vasna", "Waghodia Road",
-];
+
 
 function groupByCategory(list: typeof niches) {
   const map: Record<string, typeof niches> = {};
@@ -112,12 +106,12 @@ export default function RootLayout({
                 </ul>
               </div>
 
-              {/* Service Categories */}
+              {/* Service Categories — show top 6 per category to control crawl budget */}
               {Object.entries(grouped).map(([cat, items]) => (
                 <div key={cat} className="footer-col">
                   <h4 className="footer-heading">{cat}</h4>
-                  <ul className="footer-links footer-services-list">
-                    {items.map((n) => (
+                  <ul className="footer-links">
+                    {items.slice(0, 6).map((n) => (
                       <li key={n.slug}>
                         <Link href={`/${n.slug}`}>{n.name}</Link>
                       </li>
@@ -133,8 +127,8 @@ export default function RootLayout({
             <div className="footer-areas-container">
               <h4 className="footer-heading">Areas We Serve in Vadodara</h4>
               <div className="footer-area-tags">
-                {FOOTER_AREAS.map((area) => (
-                  <span key={area} className="footer-area-tag">{area}</span>
+                {VADODARA_AREAS.map((area) => (
+                  <Link key={area.slug} href={`/${area.slug}/ac-services`} className="footer-area-tag">{area.name}</Link>
                 ))}
               </div>
             </div>

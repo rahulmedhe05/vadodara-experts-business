@@ -19,8 +19,8 @@ export async function generateMetadata({
   if (!niche) return {};
 
   const yr = new Date().getFullYear();
-  const title = `Best ${niche.name} in Vadodara — Top Rated Experts ${yr} | VadodaraExperts`;
-  const description = `Looking for ${niche.name} in Vadodara? ✅ Certified professionals ✅ Affordable prices ✅ Same-day service ✅ 500+ happy customers. Get free estimate now! Best ${niche.name} near me Vadodara.`;
+  const title = `Best ${niche.name} in Vadodara | VadodaraExperts`;
+  const description = `Top-rated ${niche.name} in Vadodara. Certified experts, same-day service, free estimate. 500+ happy customers!`;
   const url = `https://vadodaraexperts.com/${niche.slug}`;
 
   return {

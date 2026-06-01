@@ -29,8 +29,8 @@ export async function generateMetadata({
   if (area && nicheForArea) {
     const svc = withSuffix(nicheForArea.name, "Services");
     const yr = new Date().getFullYear();
-    const title = `Best ${svc} in ${area.name}, Vadodara — Top Rated ${yr} | VadodaraExperts`;
-    const desc = `Looking for ${svc} in ${area.name} Vadodara? ✅ Certified experts ✅ Affordable prices ✅ Same-day service ✅ 500+ happy customers. Free estimate!`;
+    const title = `Best ${svc} in ${area.name} Vadodara | VadodaraExperts`;
+    const desc = `Top ${svc} in ${area.name} Vadodara. Certified experts, same-day service & free estimate. 500+ happy customers!`;
     return {
       title,
       description: desc,
@@ -46,8 +46,8 @@ export async function generateMetadata({
   const title = keywordToTitle(niche.slug, niche.name, seg2);
   const yr = new Date().getFullYear();
   return {
-    title: `${title} in Vadodara ${yr} — Best Price, Fast Service | VadodaraExperts`,
-    description: `${title} in Vadodara — ✅ Certified experts ✅ Lowest price ✅ Same-day service ✅ Free estimate. Top rated ${niche.name} near me Vadodara. Call now!`,
+    title: `${title} in Vadodara | VadodaraExperts`,
+    description: `${title} in Vadodara. Certified experts, same-day service, free estimate. Call now!`,
     keywords: `${title} Vadodara, ${niche.name} near me, ${niche.name} Vadodara price, best ${niche.name} Vadodara, ${niche.name} contact number`,
     alternates: { canonical: `https://vadodaraexperts.com/${seg1}/${seg2}` },
     openGraph: { title: `${title} in Vadodara ${yr} | VadodaraExperts`, description: `${title} Vadodara — certified experts, best price, same-day service.`, url: `https://vadodaraexperts.com/${seg1}/${seg2}`, siteName: "VadodaraExperts", locale: "en_IN", type: "website" },

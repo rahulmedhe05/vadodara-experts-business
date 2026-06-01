@@ -1,3 +1,4 @@
+import { VADODARA_AREAS } from "@/lib/areas";
 import Link from "next/link";
 import Image from "next/image";
 import { Niche } from "@/lib/data";
@@ -179,6 +180,25 @@ export default function NichePageTemplate({ niche }: NichePageProps) {
           ))}
         </div>
       </section>
+
+      {/* Areas We Serve — internal links to area pages for crawlability */}
+      <section className="section section-alt">
+        <div className="section-container">
+          <div className="section-header">
+            <h2 className="section-title" style={{fontSize:'22px'}}>{niche.name} Across Vadodara Areas</h2>
+            <p className="section-subtitle">We provide {niche.name} in all major areas of Vadodara.</p>
+          </div>
+          <div style={{display:'flex',flexWrap:'wrap',gap:'10px',justifyContent:'center'}}>
+            {VADODARA_AREAS.map(area => (
+              <a key={area.slug} href={`/${area.slug}/${niche.slug}`}
+                style={{padding:'8px 16px',background:'#fff',border:'1px solid #e2e8f0',borderRadius:'999px',fontSize:'13px',fontWeight:500,color:'#4f46e5',textDecoration:'none'}}>
+                {niche.name} in {area.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       <div className="max-w-7xl mx-auto px-4 pb-6">
         <Link href="/" className="text-blue-600 hover:underline text-sm">&larr; Back to all services</Link>
