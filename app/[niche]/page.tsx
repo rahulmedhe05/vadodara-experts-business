@@ -4,9 +4,21 @@ import NichePageTemplate from "@/components/NichePageTemplate";
 import { getNicheBySlug, niches, slugToTitle } from "@/lib/data";
 
 export const dynamicParams = true;
+export const revalidate = 86400; // ISR: rebuild once per day
 
+// Only pre-build top 20 high-traffic services at build time
+// Remaining 936 services built on first visit via ISR (faster Vercel build)
+const TOP_SERVICES = [
+  'ac-services','plumbing-services','electrical-services','pest-control-services',
+  'home-cleaning-services','interior-design-services','civil-contractors',
+  'carpenter-services','painting-contractors','waterproofing-services',
+  'cctv-installation-services','solar-panel-installation','elevator-maintenance',
+  'home-renovation-services','wedding-planning-services','catering-services',
+  'digital-marketing-services','web-development-services','car-repair-services',
+  'laptop-repair-services',
+];
 export function generateStaticParams() {
-  return niches.map((n) => ({ niche: n.slug }));
+  return TOP_SERVICES.map(slug => ({ niche: slug }));
 }
 
 export async function generateMetadata({

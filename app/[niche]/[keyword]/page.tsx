@@ -7,13 +7,12 @@ import { VADODARA_AREAS, getAreaBySlug } from "@/lib/areas";
 import { withSuffix } from "@/lib/data";
 
 export const dynamicParams = true;
+export const revalidate = 86400; // ISR: rebuild once per day
 
+// All keyword + area pages built on first visit via ISR
+// This keeps Vercel build time under 3 minutes
 export function generateStaticParams() {
-  // Area × Service params (28,680)
-  const areaParams = VADODARA_AREAS.flatMap(area =>
-    niches.map(niche => ({ niche: area.slug, keyword: niche.slug }))
-  );
-  return areaParams;
+  return [];
 }
 
 export async function generateMetadata({
