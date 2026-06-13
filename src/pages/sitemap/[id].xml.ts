@@ -3,7 +3,7 @@ import { niches } from '@/lib/data';
 import { VADODARA_AREAS } from '@/lib/areas';
 import { getNicheKeywordSlugs } from '@/lib/niche-keywords';
 
-export const prerender = false;
+export const prerender = true;
 
 const SITE = "https://vadodaraexperts.com";
 const BATCH = 5000;
@@ -32,6 +32,14 @@ function buildAllUrls(): string[] {
   }
   
   return urls;
+}
+
+export function getStaticPaths() {
+  const all = buildAllUrls();
+  const count = Math.ceil(all.length / BATCH);
+  return Array.from({ length: count }, (_, i) => ({
+    params: { id: i.toString() },
+  }));
 }
 
 export const GET: APIRoute = async ({ params }) => {

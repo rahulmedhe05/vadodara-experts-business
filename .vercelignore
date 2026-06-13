@@ -1,0 +1,9 @@
+node_modules
+.git
+.github
+.astro
+dist
+.vercel
+scratch
+.claude
+*.log

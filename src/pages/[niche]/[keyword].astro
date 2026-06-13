@@ -8,6 +8,9 @@ import Layout from "../../layouts/Layout.astro";
 // Disable pre-rendering for deep pages to enable SSR dynamic scaling
 export const prerender = false;
 
+// Enable edge caching with stale-while-revalidate on Vercel CDN
+Astro.response.headers.set('Cache-Control', 'public, max-age=0, s-maxage=86400, stale-while-revalidate=86400');
+
 const { niche: seg1, keyword: seg2 } = Astro.params;
 
 if (!seg1 || !seg2) {

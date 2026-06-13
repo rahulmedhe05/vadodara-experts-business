@@ -3,7 +3,7 @@ import { niches } from '@/lib/data';
 import { VADODARA_AREAS } from '@/lib/areas';
 import { getNicheKeywordSlugs } from '@/lib/niche-keywords';
 
-export const prerender = false;
+export const prerender = true;
 
 const SITE = "https://vadodaraexperts.com";
 const BATCH = 5000;
