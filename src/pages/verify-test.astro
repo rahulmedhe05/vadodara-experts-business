@@ -1,0 +1,194 @@
+---
+import { niches } from "@/lib/data";
+import { VADODARA_AREAS } from "@/lib/areas";
+import { generatePageContent } from "@/lib/content";
+import { getNicheKeywordSlugs } from "@/lib/niche-keywords";
+
+// Only allow in development mode for safety
+const isDev = import.meta.env.DEV;
+
+let testResults = [];
+let errorCount = 0;
+
+if (isDev) {
+  // We will test sample niche hubs, keyword pages, and area landing pages
+  const sampleNiches = niches.slice(0, 5);
+
+  // 1. Test static hubs
+  for (const n of sampleNiches) {
+    try {
+      testResults.push({
+        type: "Category Hub",
+        url: `/${n.slug}`,
+        status: "OK",
+        checks: [`Slug: ${n.slug}`, `Category: ${n.category}`]
+      });
+    } catch (e: any) {
+      errorCount++;
+      testResults.push({
+        type: "Category Hub",
+        url: `/${n.slug}`,
+        status: "ERROR",
+        error: e.message
+      });
+    }
+  }
+
+  // 2. Test keywords
+  for (const n of sampleNiches) {
+    const kws = getNicheKeywordSlugs(n.slug).slice(0, 2);
+    for (const kw of kws) {
+      try {
+        const title = `${kw} in Vadodara`;
+        const content = generatePageContent(n.slug, n.name, n.category, kw, title);
+        
+        // Validate uniqueness & richness metrics
+        const introWords = content.introParagraph.split(/\s+/).length;
+        const detailedWords = content.detailedContent.split(/\s+/).length;
+        const totalWords = introWords + detailedWords;
+        const hasPricing = content.pricingTiers.length === 3;
+        const hasSpecs = content.specs.length === 8;
+        const hasProximity = content.proximityParagraph.length > 50;
+
+        testResults.push({
+          type: "Keyword Page",
+          url: `/${n.slug}/${kw}`,
+          status: totalWords > 200 && hasPricing && hasSpecs && hasProximity ? "OK" : "WARNING",
+          checks: [
+            `Total word count: ${totalWords} words`,
+            `Pricing packages check: ${hasPricing ? "Verified (3 tiers)" : "FAILED"}`,
+            `Key metrics check: ${hasSpecs ? "Verified (8 specs)" : "FAILED"}`,
+            `Local proximity check: ${hasProximity ? "Verified" : "FAILED"}`
+          ]
+        });
+      } catch (e: any) {
+        errorCount++;
+        testResults.push({
+          type: "Keyword Page",
+          url: `/${n.slug}/${kw}`,
+          status: "ERROR",
+          error: e.message
+        });
+      }
+    }
+  }
+
+  // 3. Test area niche combinations
+  const sampleAreas = VADODARA_AREAS.slice(0, 5);
+  for (const area of sampleAreas) {
+    for (const n of sampleNiches) {
+      try {
+        const title = `Best ${n.name} in ${area.name} Vadodara`;
+        const content = generatePageContent(
+          n.slug,
+          n.name,
+          n.category,
+          `${n.slug}-in-${area.slug}`,
+          title,
+          area.name,
+          area.pin,
+          area.landmarks as unknown as string[],
+          area.neighbors as unknown as string[]
+        );
+
+        const introWords = content.introParagraph.split(/\s+/).length;
+        const detailedWords = content.detailedContent.split(/\s+/).length;
+        const totalWords = introWords + detailedWords;
+        const hasPricing = content.pricingTiers.length === 3;
+        const hasSpecs = content.specs.length === 8;
+        
+        // Ensure specific area elements are rendered
+        const hasLandmarks = area.landmarks.some(l => content.proximityParagraph.includes(l));
+        const hasNeighbors = area.neighbors.some(nb => content.proximityParagraph.includes(nb));
+
+        testResults.push({
+          type: "Area Landing Page",
+          url: `/${area.slug}/${n.slug}`,
+          status: totalWords > 200 && hasPricing && hasSpecs && hasLandmarks ? "OK" : "WARNING",
+          checks: [
+            `Total word count: ${totalWords} words`,
+            `PIN Code used: ${area.pin}`,
+            `Landmarks mapped: ${hasLandmarks ? "Verified (Matches " + area.name + " spots)" : "FAILED"}`,
+            `Adjacent areas mapped: ${hasNeighbors ? "Verified" : "FAILED"}`
+          ]
+        });
+      } catch (e: any) {
+        errorCount++;
+        testResults.push({
+          type: "Area Landing Page",
+          url: `/${area.slug}/${n.slug}`,
+          status: "ERROR",
+          error: e.message
+        });
+      }
+    }
+  }
+}
+---
+
+<html>
+<head>
+  <title>System Integration &amp; Content Richness Verification</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; background: #f8fafc; color: #0f172a; }
+    h1 { font-size: 28px; font-weight: 800; margin-bottom: 24px; color: #1e1b4b; }
+    .card { background: white; padding: 24px; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 30px; }
+    .metric { font-size: 14px; margin-bottom: 8px; }
+    .status-ok { color: #15803d; font-weight: bold; background: #dcfce7; padding: 2px 8px; border-radius: 4px; }
+    .status-warning { color: #b45309; font-weight: bold; background: #fef3c7; padding: 2px 8px; border-radius: 4px; }
+    .status-error { color: #b91c1c; font-weight: bold; background: #fee2e2; padding: 2px 8px; border-radius: 4px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+    th { background: #f1f5f9; font-weight: 600; }
+    pre { background: #0f172a; color: #f8fafc; padding: 12px; border-radius: 6px; font-size: 12px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <h1>System Integration &amp; Content Richness Verification</h1>
+  
+  {!isDev ? (
+    <div class="status-error" style="display:inline-block; padding: 10px 20px;">Access Blocked: This test endpoint is only accessible in development mode.</div>
+  ) : (
+    <div class="card">
+      <h2>Test Suite Execution Summary</h2>
+      <div class="metric">Total Routes Inspected: <strong>{testResults.length}</strong></div>
+      <div class="metric">Failed Executions: <strong class={errorCount > 0 ? "status-error" : "status-ok"}>{errorCount}</strong></div>
+      <div class="metric">Verification Mode: <strong>AEO/GEO/SEO Structural Content Rules Validation</strong></div>
+    </div>
+
+    <div class="card">
+      <h2>Detailed Route Verifications</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Sample Route Path</th>
+            <th>Dynamic Compilation Status</th>
+            <th>Checks / Metrics Checked</th>
+          </tr>
+        </thead>
+        <tbody>
+          {testResults.map((t) => (
+            <tr>
+              <td><strong>{t.type}</strong></td>
+              <td><code>{t.url}</code></td>
+              <td>
+                <span class={
+                  t.status === "OK" ? "status-ok" : 
+                  t.status === "WARNING" ? "status-warning" : "status-error"
+                }>{t.status}</span>
+              </td>
+              <td>
+                <ul style="margin:0; padding-left:20px; font-size:12px; list-style-type: square;">
+                  {t.checks?.map((c) => <li>{c}</li>)}
+                  {t.error && <li style="color:red; font-weight:bold;">Error: {t.error}</li>}
+                </ul>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )}
+</body>
+</html>

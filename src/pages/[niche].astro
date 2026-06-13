@@ -1,0 +1,32 @@
+---
+import { niches, getNicheBySlug } from "@/lib/data";
+import NichePageTemplate from "@/components/NichePageTemplate";
+import Layout from "../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return niches.map((niche) => ({
+    params: { niche: niche.slug },
+  }));
+}
+
+const { niche: slug } = Astro.params;
+const niche = getNicheBySlug(slug);
+
+if (!niche) {
+  return Astro.redirect('/404');
+}
+
+const title = `Best ${niche.name} in Vadodara | VadodaraExperts`;
+const description = `Top-rated ${niche.name} in Vadodara. Certified experts, same-day service, free estimate. 500+ happy customers!`;
+const url = `https://vadodaraexperts.com/${niche.slug}`;
+const keywords = `best ${niche.name} in Vadodara, ${niche.name} near me, ${niche.name} Vadodara price, ${niche.name} contact number Vadodara, affordable ${niche.name} Vadodara, top rated ${niche.name} Vadodara`;
+---
+
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonical={url}
+>
+  <NichePageTemplate niche={niche} client:load />
+</Layout>

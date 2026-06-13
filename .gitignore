@@ -43,3 +43,11 @@ next-env.d.ts
 # Large image assets — served from Vercel's CDN directly, not tracked in git
 # Images are already deployed. Remove from future commits to speed up push.
 # public/images/niches/
+
+# Astro
+.astro/
+/dist/
+
+# Scratch folder
+/scratch/
+

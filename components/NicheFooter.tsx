@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { slugToTitle, getRelatedNiches } from "@/lib/data";
-import { vadodaraAreas, generateLongTailKeywords } from "@/lib/content";
+import { generateLongTailKeywords } from "@/lib/content";
 import { getNicheKeywordSlugs } from "@/lib/niche-keywords";
+import { VADODARA_AREAS } from "@/lib/areas";
 
 interface NicheFooterProps {
   nicheSlug: string;
@@ -105,13 +106,13 @@ export default function NicheFooter({
             {nicheName} Available in All Areas of Vadodara
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 text-sm">
-            {vadodaraAreas.map((area) => (
+            {VADODARA_AREAS.map((area) => (
               <Link
-                key={area}
-                href={`/${nicheSlug}`}
+                key={area.slug}
+                href={`/${area.slug}/${nicheSlug}`}
                 className="text-gray-600 hover:text-indigo-600 no-underline py-1"
               >
-                {nicheName} in {area}
+                {nicheName} in {area.name}
               </Link>
             ))}
           </div>

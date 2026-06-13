@@ -1,0 +1,63 @@
+---
+import { getAreaBySlug } from "@/lib/areas";
+import { getNicheBySlug, keywordToTitle, withSuffix } from "@/lib/data";
+import AreaNichePage from "@/components/AreaNichePage";
+import KeywordPageTemplate from "@/components/KeywordPageTemplate";
+import Layout from "../../layouts/Layout.astro";
+
+// Disable pre-rendering for deep pages to enable SSR dynamic scaling
+export const prerender = false;
+
+const { niche: seg1, keyword: seg2 } = Astro.params;
+
+if (!seg1 || !seg2) {
+  return Astro.redirect('/404');
+}
+
+// 1. Area + Niche page?
+const area = getAreaBySlug(seg1);
+const nicheForArea = area ? getNicheBySlug(seg2) : null;
+
+let isAreaPage = false;
+let title = "";
+let description = "";
+let keywords = "";
+let canonical = `https://vadodaraexperts.com/${seg1}/${seg2}`;
+
+if (area && nicheForArea) {
+  isAreaPage = true;
+  const svc = withSuffix(nicheForArea.name, "Services");
+  title = `Best ${svc} in ${area.name} Vadodara | VadodaraExperts`;
+  description = `Top ${svc} in ${area.name} Vadodara. Certified experts, same-day service & free estimate. 500+ happy customers!`;
+  keywords = `${svc} ${area.name}, ${nicheForArea.name} in ${area.name} Vadodara, best ${nicheForArea.name} ${area.name}, ${nicheForArea.name} near me ${area.name}, ${nicheForArea.name} ${area.name} price`;
+} else {
+  // 2. Niche + Keyword page?
+  const niche = getNicheBySlug(seg1);
+  if (!niche) {
+    return Astro.redirect('/404');
+  }
+  
+  // Validate against dynamic keywords
+  if (niche.keywords.length > 0 && !niche.keywords.includes(seg2)) {
+    return Astro.redirect('/404');
+  }
+  
+  const kwTitle = keywordToTitle(niche.slug, niche.name, seg2);
+  title = `${kwTitle} in Vadodara | VadodaraExperts`;
+  description = `${kwTitle} in Vadodara. Certified experts, same-day service, free estimate. Call now!`;
+  keywords = `${kwTitle} Vadodara, ${niche.name} near me, ${niche.name} Vadodara price, best ${niche.name} Vadodara, ${niche.name} contact number`;
+}
+---
+
+<Layout
+  title={title}
+  description={description}
+  keywords={keywords}
+  canonical={canonical}
+>
+  {isAreaPage ? (
+    <AreaNichePage area={area!} niche={nicheForArea!} client:load />
+  ) : (
+    <KeywordPageTemplate niche={getNicheBySlug(seg1)!} keyword={seg2} client:load />
+  )}
+</Layout>

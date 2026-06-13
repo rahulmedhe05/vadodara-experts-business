@@ -1,3 +1,5 @@
+import { getNicheKeywordSlugs } from "./niche-keywords";
+
 export interface Niche {
   slug: string;
   name: string;
@@ -1194,4 +1196,7 @@ niches.push(
 );
 
 // Populate all keywords
-niches.forEach(n => { n.keywords = generateKeywords(n.slug); });
+niches.forEach(n => {
+  const kws = getNicheKeywordSlugs(n.slug);
+  n.keywords = kws.length > 0 ? kws : generateKeywords(n.slug);
+});

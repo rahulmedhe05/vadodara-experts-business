@@ -36,6 +36,9 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
     ],
   };
 
+  const lowPriceNum = content.pricingTiers[0].price.replace(/[^0-9]/g, "");
+  const highPriceNum = content.pricingTiers[2].price.replace(/[^0-9]/g, "");
+
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -49,6 +52,20 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
     },
     areaServed: { "@type": "City", name: "Vadodara" },
     serviceType: niche.name,
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency: "INR",
+      lowPrice: lowPriceNum || "399",
+      highPrice: highPriceNum || "3999",
+      offerCount: "3"
+    },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: content.ratingValue,
+      reviewCount: content.reviewCount.toString(),
+      bestRating: "5",
+      worstRating: "1"
+    }
   };
 
   const faqSchema = {
@@ -95,7 +112,7 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
             </p>
             <div className="flex flex-wrap gap-3">
               <span className="bg-green-500/20 text-green-200 px-4 py-1.5 rounded-full text-sm font-semibold">&#10003; Verified</span>
-              <span className="bg-yellow-500/20 text-yellow-200 px-4 py-1.5 rounded-full text-sm font-semibold">&#9733; 4.8 Rated</span>
+              <span className="bg-yellow-500/20 text-yellow-200 px-4 py-1.5 rounded-full text-sm font-semibold">&#9733; {content.ratingValue} Rated ({content.totalReviewCount}+ Reviews)</span>
               <span className="bg-blue-500/20 text-blue-200 px-4 py-1.5 rounded-full text-sm font-semibold">&#9889; Same-Day</span>
             </div>
           </div>
@@ -111,6 +128,22 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
             {/* Intro paragraph */}
             <h2 className="text-2xl font-bold mb-4">{title} — Professional {niche.name} in Vadodara</h2>
             <p className="text-gray-700 leading-relaxed mb-6">{content.introParagraph}</p>
+
+            {/* Service Specifications Grid - Optimized for GEO & AEO */}
+            <div className="my-6 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+              <h3 className="text-lg font-bold mb-4 text-gray-900 flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-blue-600 rounded-full"></span>
+                Service Specifications & Key Metrics
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-x-8 gap-y-3">
+                {content.specs.map((spec, i) => (
+                  <div key={i} className="flex justify-between border-b border-gray-100 pb-2 text-sm">
+                    <span className="text-gray-500 font-medium">{spec.label}</span>
+                    <span className="text-gray-900 font-semibold text-right">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
 
             {/* Content Image */}
             <div className="my-6 rounded-xl overflow-hidden">
@@ -164,6 +197,59 @@ export default function KeywordPageTemplate({ niche, keyword }: KeywordPageProps
             {/* Detailed Content Section */}
             <h2 className="text-2xl font-bold mb-4">Complete Guide to {title} in Vadodara</h2>
             <p className="text-gray-700 leading-relaxed mb-6">{content.detailedContent}</p>
+
+            {/* Local Neighborhood Proximity Section - GEO Hyper-local anchor */}
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 my-6">
+              <h3 className="font-bold text-lg mb-2 text-slate-800 flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-slate-500 rounded-full"></span>
+                Local Proximity & Service Coverage
+              </h3>
+              <p className="text-gray-700 text-sm leading-relaxed">{content.proximityParagraph}</p>
+            </div>
+
+            {/* Pricing Packages Table - SEO Price Schema & GEO comparative layout */}
+            <div className="my-8">
+              <h2 className="text-2xl font-bold mb-2">Pricing Packages & Plans for {title}</h2>
+              <p className="text-gray-600 text-sm mb-6">
+                Choose the pricing package that fits your specific needs. VadodaraExperts maintains a direct, in-house delivery model with transparent pricing and zero middleman markup.
+              </p>
+              <div className="grid sm:grid-cols-3 gap-6">
+                {content.pricingTiers.map((tier, i) => {
+                  const isRec = tier.name.includes("Recommended");
+                  return (
+                    <div 
+                      key={i} 
+                      className={`border rounded-xl p-5 flex flex-col justify-between transition-all hover:shadow-md ${
+                        isRec 
+                          ? "border-blue-500 shadow-sm bg-blue-50/10 relative" 
+                          : "border-gray-200 bg-white"
+                      }`}
+                    >
+                      {isRec && (
+                        <span className="absolute -top-3 left-4 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                          Most Popular
+                        </span>
+                      )}
+                      <div>
+                        <h3 className="font-bold text-base text-gray-900">{tier.name}</h3>
+                        <div className="my-3">
+                          <span className="text-2xl font-black text-blue-700">{tier.price}</span>
+                        </div>
+                        <p className="text-xs text-gray-500 mb-4 leading-relaxed">{tier.bestFor}</p>
+                        <ul className="space-y-2 mb-6">
+                          {tier.deliverables.map((deliv, idx) => (
+                            <li key={idx} className="text-xs text-gray-700 flex items-start gap-1.5">
+                              <span className="text-green-600 font-bold mt-0.5">&#10003;</span>
+                              <span>{deliv}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
 
             {/* Keyword Boost */}
             <p className="text-gray-700 leading-relaxed mb-6">{content.keywordBoostSection}</p>

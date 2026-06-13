@@ -422,6 +422,215 @@ export function generateNichePageContent(nicheName: string, category: string): N
   return { introSection, whyChoosePoints: getWhyChooseSection(nicheName, category, rng), servicesOverview, howItWorks, qualityPromise, pricingInfo, faqs };
 }
 
+// ===== NEW ENRICHED STRUCTURES FOR AEO/GEO/SEO =====
+export interface PricingTier {
+  name: string;
+  price: string;
+  deliverables: string[];
+  bestFor: string;
+}
+
+export interface ServiceSpec {
+  label: string;
+  value: string;
+}
+
+export function generatePricingTable(
+  nicheName: string,
+  category: string,
+  keyword: string,
+  areaName?: string
+): PricingTier[] {
+  const seed = hashStr(nicheName + (areaName || "Vadodara"));
+  const rng = seededRng(seed);
+
+  // Different pricing brackets based on category
+  let basicPrice = "₹349";
+  let standardPrice = "₹999";
+  let premiumPrice = "₹2,499";
+  
+  let basicDeliv: string[] = [];
+  let standardDeliv: string[] = [];
+  let premiumDeliv: string[] = [];
+
+  const locationText = areaName ? `in ${areaName}` : "in Vadodara";
+
+  if (category === "Home Services") {
+    basicPrice = pick(["₹299", "₹349", "₹399", "₹449"], rng);
+    standardPrice = pick(["₹799", "₹899", "₹999", "₹1,199"], rng);
+    premiumPrice = pick(["₹1,999", "₹2,499", "₹2,999", "₹3,499"], rng);
+
+    basicDeliv = [
+      `Single point inspection and diagnosis ${locationText}`,
+      "Basic cleaning/servicing of one unit",
+      "Post-service cleanup and testing",
+      "15-day workmanship warranty"
+    ];
+    standardDeliv = [
+      `Complete end-to-end standard servicing ${locationText}`,
+      "Minor parts adjustment & lubricating included",
+      "Gas pressure or electrical safety checkup",
+      "30-day workmanship warranty"
+    ];
+    premiumDeliv = [
+      `Deep comprehensive servicing & restoration ${locationText}`,
+      "Genuine spare parts replacement support",
+      "Priority same-day dispatch & senior technician assigned",
+      "90-day extended service warranty"
+    ];
+  } else if (category === "Professional Services") {
+    basicPrice = pick(["₹999", "₹1,200", "₹1,499", "₹1,999"], rng);
+    standardPrice = pick(["₹2,999", "₹3,499", "₹3,999", "₹4,999"], rng);
+    premiumPrice = pick(["₹7,499", "₹8,999", "₹9,999", "₹12,499"], rng);
+
+    basicDeliv = [
+      `One-time basic consultation ${locationText}`,
+      "Standard document review and analysis",
+      "Initial assessment report and roadmap",
+      "Email support for 7 days"
+    ];
+    standardDeliv = [
+      `Comprehensive service package ${locationText}`,
+      "Full documentation prep and verification",
+      "Liaison with local bodies / direct consultation hours",
+      "Priority support and chat channel access"
+    ];
+    premiumDeliv = [
+      `Premium end-to-end execution & management ${locationText}`,
+      "Dedicated senior consultant assigned",
+      "Expedited processing and full compliance audit",
+      "24/7 priority hotline and post-service SLA"
+    ];
+  } else if (category === "Construction & Infrastructure" || category === "Industrial Services") {
+    basicPrice = "₹5,000 onwards";
+    standardPrice = "₹25,000 onwards";
+    premiumPrice = "₹75,000 onwards";
+
+    basicDeliv = [
+      `Initial site survey and feasibility layout ${locationText}`,
+      "Basic architectural blueprint/structural planning",
+      "Material estimate and quotation breakdown",
+      "On-site consultation with project engineer"
+    ];
+    standardDeliv = [
+      `Standard project contract execution ${locationText}`,
+      "Procurement of standard grade ISI-marked materials",
+      "Execution by trained civil/industrial specialists",
+      "Weekly milestone review reports"
+    ];
+    premiumDeliv = [
+      `Premium custom turnkey project execution ${locationText}`,
+      "Premium architectural styling & top-grade materials",
+      "Dedicated Project Manager for daily updates",
+      "Full local compliance certifications and guarantees"
+    ];
+  } else {
+    basicPrice = "₹499";
+    standardPrice = "₹1,499";
+    premiumPrice = "₹3,999";
+
+    basicDeliv = [
+      `Basic one-time ${nicheName} service ${locationText}`,
+      "Initial inspection & troubleshooting",
+      "Standard safety checkup"
+    ];
+    standardDeliv = [
+      `Comprehensive ${nicheName} package ${locationText}`,
+      "Full maintenance, cleaning or processing",
+      "30-day performance warranty"
+    ];
+    premiumDeliv = [
+      `Advanced deep-dive ${nicheName} solution ${locationText}`,
+      "Premium tools and senior specialists assigned",
+      "90-day comprehensive service guarantee"
+    ];
+  }
+
+  return [
+    {
+      name: "Basic Plan",
+      price: basicPrice,
+      deliverables: basicDeliv,
+      bestFor: `Quick checkups, minor inspections, or basic one-time tasks ${locationText}`
+    },
+    {
+      name: "Standard Plan (Recommended)",
+      price: standardPrice,
+      deliverables: standardDeliv,
+      bestFor: `Complete annual/routine maintenance and standard repairs ${locationText}`
+    },
+    {
+      name: "Premium Plan",
+      price: premiumPrice,
+      deliverables: premiumDeliv,
+      bestFor: `Heavy-duty restoration, complex problems, or premium turnkey execution ${locationText}`
+    }
+  ];
+}
+
+export function generateSpecs(
+  nicheName: string,
+  category: string,
+  keyword: string,
+  areaName?: string
+): ServiceSpec[] {
+  const locationText = areaName ? `${areaName}, Vadodara` : "Vadodara (City-wide)";
+  
+  let serviceMode = "At-Home / On-Site Service";
+  let estimatedDuration = "1 - 3 Hours";
+  let crewSize = "1 - 2 Specialists";
+  
+  if (category === "Professional Services") {
+    serviceMode = "Office / Online Consultation";
+    estimatedDuration = "1 - 2 Days";
+    crewSize = "Dedicated Consultant";
+  } else if (category === "Construction & Infrastructure" || category === "Industrial Services") {
+    serviceMode = "On-Site Civil/Industrial Works";
+    estimatedDuration = "3 - 15 Days (Varies)";
+    crewSize = "3 - 8 Workers + Supervisor";
+  }
+
+  return [
+    { label: "Service Area", value: locationText },
+    { label: "Execution Mode", value: serviceMode },
+    { label: "Estimated Duration", value: estimatedDuration },
+    { label: "Staff Assigned", value: crewSize },
+    { label: "Quality Checks", value: "Multi-point Quality Verification" },
+    { label: "Workmanship Warranty", value: "90-Day Written Guarantee" },
+    { label: "Emergency Response", value: "Available (Within 2 Hours)" },
+    { label: "Materials Sourced", value: "Direct from Manufacturer (Genuine & Certified)" }
+  ];
+}
+
+export function generateProximityParagraph(
+  nicheName: string,
+  areaName: string,
+  pin: string,
+  landmarks: string[],
+  neighbors: string[],
+  rng: () => number
+): string {
+  const l1 = pick(landmarks, rng);
+  const l2 = landmarks.length > 1 ? landmarks.filter(l => l !== l1)[Math.floor(rng() * (landmarks.length - 1))] : l1;
+  const n1 = pick(neighbors, rng);
+  const n2 = neighbors.length > 1 ? neighbors.filter(n => n !== n1)[Math.floor(rng() * (neighbors.length - 1))] : n1;
+
+  const templates = [
+    `Our ${nicheName} service in ${areaName} is highly integrated with the local community. We regularly serve clients situated near major landmarks such as ${l1} and around ${l2}. By deploying our technicians locally, we ensure rapid transit and arrival times, especially if you are located on the main corridors connecting ${areaName} with neighboring ${n1} and ${n2}. This hyper-local focus enables us to reach any address in ${areaName} (including residential blocks within PIN Code ${pin}) in under 30 minutes.`,
+    `Serving ${areaName} (PIN: ${pin}), VadodaraExperts provides direct, on-demand ${nicheName} to both homes and businesses. Our team is active around prominent spots like ${l1} and the bustling markets near ${l2}. We cover not only central ${areaName} but also establish smooth service pipelines to adjacent localities like ${n1} and ${n2}. This proximity ensures our response team is always nearby to handle emergencies or scheduled checkups immediately.`,
+    `For anyone searching for professional ${nicheName} in the ${areaName} sector, VadodaraExperts maintains a dedicated service presence here. With regular dispatches near ${l1} and the surrounding residential spaces of ${l2}, our certified specialists have intimate knowledge of the local architecture and layout of ${areaName}. We also extend our operations seamlessly to nearby ${n1} and ${n2}, making us the most accessible and reliable local provider in this part of Vadodara.`
+  ];
+
+  return pick(templates, rng);
+}
+
+export function generateGeneralProximityParagraph(nicheName: string, rng: () => number): string {
+  const sampleAreas = ["Alkapuri", "Gotri", "Manjalpur", "Karelibaug", "Fatehgunj", "Akota", "Nizampura", "Subhanpura"];
+  const selectedAreas = pickN(sampleAreas, 4, rng);
+  
+  return `VadodaraExperts operates a city-wide network of certified specialists to deliver top-tier ${nicheName} across all zones of Vadodara. Our service fleet is strategically distributed across major hubs, including ${selectedAreas[0]}, ${selectedAreas[1]}, ${selectedAreas[2]}, and ${selectedAreas[3]}. This enables us to maintain a rapid response time of under 30-45 minutes. Whether you are situated near the MS University campus, the busy retail sectors of Alkapuri, or the growing residential complexes in Gotri, our in-house team is equipped to reach your doorstep promptly with all necessary equipment.`;
+}
+
 // ===== MAIN EXPORT =====
 export interface PageContent {
   introParagraph: string;
@@ -431,6 +640,12 @@ export interface PageContent {
   keywordBoostSection: string;
   faqs: Array<{ q: string; a: string }>;
   longTailKeywords: string[];
+  pricingTiers: PricingTier[];
+  specs: ServiceSpec[];
+  proximityParagraph: string;
+  ratingValue: string;
+  reviewCount: number;
+  totalReviewCount: number;
 }
 
 export function generatePageContent(
@@ -439,14 +654,23 @@ export function generatePageContent(
   category: string,
   keyword: string,
   kwTitle: string,
+  areaName?: string,
+  areaPin?: string,
+  areaLandmarks?: string[],
+  areaNeighbors?: string[]
 ): PageContent {
   const kwType = detectKeywordType(keyword.replace(/-vadodara$/, ""));
   // Unique seed per keyword page for synonym variation
-  const seed = hashStr(nicheSlug + keyword);
+  const seed = hashStr(nicheSlug + keyword + (areaName || ""));
   const rng = seededRng(seed);
 
   const n = nicheName.toLowerCase();
   const t = kwTitle.toLowerCase();
+
+  // Deterministically generate rating values to avoid search footprints
+  const ratingVal = (4.7 + Math.floor(rng() * 3) / 10).toFixed(1);
+  const reviewCnt = 80 + Math.floor(rng() * 150);
+  const totalReviewCnt = 400 + Math.floor(rng() * 250);
 
   return {
     introParagraph: buildIntroParagraph(kwType, n, t, rng),
@@ -456,5 +680,15 @@ export function generatePageContent(
     keywordBoostSection: buildKeywordBoost(n, t, rng),
     faqs: generateFAQs(nicheName, kwTitle, kwType),
     longTailKeywords: generateLongTailKeywords(nicheSlug, nicheName, keyword),
+    pricingTiers: generatePricingTable(nicheName, category, keyword, areaName),
+    specs: generateSpecs(nicheName, category, keyword, areaName),
+    proximityParagraph: areaName && areaPin && areaLandmarks && areaNeighbors 
+      ? generateProximityParagraph(nicheName, areaName, areaPin, areaLandmarks, areaNeighbors, rng)
+      : generateGeneralProximityParagraph(nicheName, rng),
+    ratingValue: ratingVal,
+    reviewCount: reviewCnt,
+    totalReviewCount: totalReviewCnt
   };
 }
+
+

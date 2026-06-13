@@ -3,27 +3,31 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "lint": "eslint",
     "generate-pages": "node scripts/generate-pages.mjs",
     "submit-google": "node scripts/submit-to-google.mjs"
   },
   "dependencies": {
-    "next": "16.1.6",
+    "@astrojs/node": "^8.3.4",
+    "@astrojs/react": "^3.6.3",
+    "@astrojs/tailwind": "^5.1.5",
+    "astro": "^4.16.19",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/vite": "^4.3.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@types/sharp": "^0.32.0",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

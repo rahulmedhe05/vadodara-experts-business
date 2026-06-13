@@ -2,6 +2,7 @@ import Link from "next/link";
 import { niches, withSuffix, type Niche } from "@/lib/data";
 import { VADODARA_AREAS } from "@/lib/areas";
 import NicheHeroForm from "@/components/NicheHeroForm";
+import { generatePageContent } from "@/lib/content";
 
 type AreaType = typeof VADODARA_AREAS[number];
 
@@ -11,6 +12,23 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
 
   const svc = withSuffix(niche.name, "Services");
   const yr = new Date().getFullYear();
+
+  // Call the dynamic content generator to generate rich descriptions, specs, pricing tiers, and neighborhood relevance
+  const title = `Best ${svc} in ${area.name} Vadodara`;
+  const content = generatePageContent(
+    niche.slug,
+    niche.name,
+    niche.category,
+    `${niche.slug}-in-${area.slug}`,
+    title,
+    area.name,
+    area.pin,
+    area.landmarks as unknown as string[],
+    area.neighbors as unknown as string[]
+  );
+
+  const lowPriceNum = content.pricingTiers[0].price.replace(/[^0-9]/g, "");
+  const highPriceNum = content.pricingTiers[2].price.replace(/[^0-9]/g, "");
 
   // JSON-LD Schema
   const schema = {
@@ -32,7 +50,7 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
         },
         "areaServed": { "@type": "City", "name": "Vadodara" },
         "priceRange": "₹₹",
-        "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.8", "reviewCount": "127" },
+        "aggregateRating": { "@type": "AggregateRating", "ratingValue": content.ratingValue, "reviewCount": content.reviewCount.toString() },
       },
       {
         "@type": "Service",
@@ -40,6 +58,13 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
         "provider": { "@type": "LocalBusiness", "name": "VadodaraExperts" },
         "areaServed": `${area.name}, Vadodara`,
         "description": `Professional ${svc} available in ${area.name}, Vadodara. Trusted experts, best prices, guaranteed work.`,
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "INR",
+          "lowPrice": lowPriceNum || "399",
+          "highPrice": highPriceNum || "3999",
+          "offerCount": "3"
+        }
       },
       {
         "@type": "FAQPage",
@@ -93,7 +118,7 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
               <span style={{ color: "#22d3ee" }}>{area.name}</span>
             </nav>
             <div style={{ display: "inline-block", background: "rgba(6,182,212,0.15)", color: "#22d3ee", border: "1px solid rgba(6,182,212,0.3)", borderRadius: 999, padding: "5px 16px", fontSize: 13, fontWeight: 600, marginBottom: 20 }}>
-              ⭐ Top Rated in {area.name} — 4.8★ (500+ Reviews)
+              ⭐ Top Rated in {area.name} — {content.ratingValue}★ ({content.totalReviewCount}+ Reviews)
             </div>
             <h1 style={{ fontSize: "clamp(26px,4vw,42px)", fontWeight: 900, color: "#fff", margin: "0 0 16px", lineHeight: 1.2 }}>
               Best {svc} in <span style={{ color: "#22d3ee" }}>{area.name}</span>,<br />Vadodara {yr}
@@ -161,18 +186,93 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 360px", gap: 48, alignItems: "start" }}>
           <div>
             <h2 style={{ fontSize: 28, fontWeight: 800, margin: "0 0 16px" }}>{svc} in {area.name}, Vadodara — Complete Guide {yr}</h2>
-            <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: 16 }}>
-              Are you searching for the <strong>best {niche.name} in {area.name}, Vadodara</strong>? You've come to the right place. VadodaraExperts is Vadodara's most trusted platform for {niche.name} in {area.name} and all surrounding areas including {otherAreas.slice(0,4).map(a=>a.name).join(", ")}. Whether you need <strong>{niche.name} for home</strong>, office, apartment, villa, or commercial property — our certified experts in {area.name} are ready to help.
-            </p>
-            <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: 16 }}>
-              Our <strong>{niche.name} professionals in {area.name}</strong> are background-checked, insured, and trained by VadodaraExperts. Serving {area.name} (PIN: {area.pin}) and all adjacent localities, we cover every corner of this neighbourhood. Transparent pricing, no hidden charges — get a <strong>free {niche.name} estimate in {area.name}</strong> via WhatsApp in under 15 minutes.
-            </p>
-            <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: 24 }}>
-              Whether you need <strong>emergency {niche.name} in {area.name}</strong>, same-day service, or planned maintenance — VadodaraExperts delivers. Our {niche.name} team covers all of {area.name} including nearby pincodes ({area.pin}). We are the <strong>top-rated {niche.name} company in {area.name}</strong> with 500+ verified customer reviews.
+            
+            {/* Dynamic Intro Paragraph */}
+            <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: 16, fontSize: 15 }}>
+              {content.introParagraph}
             </p>
 
+            {/* Specifications Grid */}
+            <div style={{ margin: "24px 0", background: "#fff", border: "1px solid #e2e8f0", borderRadius: 12, padding: 24, boxShadow: "0 1px 3px rgba(0,0,0,0.05)" }}>
+              <h3 style={{ fontSize: 18, fontWeight: 700, margin: "0 0 16px", display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ display: "inline-block", width: 4, height: 20, background: "#4f46e5", borderRadius: 99 }}></span>
+                Service Specifications & Pincode Coverage
+              </h3>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "12px 24px" }}>
+                {content.specs.map((spec, i) => (
+                  <div key={i} style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid #f1f5f9", paddingBottom: 8, fontSize: 14 }}>
+                    <span style={{ color: "#64748b", fontWeight: 500 }}>{spec.label}</span>
+                    <span style={{ color: "#0f172a", fontWeight: 600, textAlign: "right" }}>{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Detailed Guide Content */}
+            <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: 16, fontSize: 15 }}>
+              {content.detailedContent}
+            </p>
+
+            {/* Local Transit/Landmarks Proximity Section */}
+            <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 12, padding: 20, margin: "24px 0" }}>
+              <h3 style={{ fontSize: 16, fontWeight: 700, margin: "0 0 8px", color: "#1e293b" }}>Local Landmarks & Accessibility in {area.name}</h3>
+              <p style={{ color: "#475569", fontSize: 14, lineHeight: 1.7, margin: 0 }}>
+                {content.proximityParagraph}
+              </p>
+            </div>
+
+            {/* Pricing Packages Table */}
+            <div style={{ margin: "32px 0" }}>
+              <h3 style={{ fontSize: 22, fontWeight: 800, margin: "0 0 8px" }}>Pricing & Service Packages in {area.name}</h3>
+              <p style={{ color: "#64748b", fontSize: 14, margin: "0 0 20px" }}>
+                Select a direct plan that matches your project requirements. VadodaraExperts assigns background-verified in-house experts directly with a written service warranty.
+              </p>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
+                {content.pricingTiers.map((tier, i) => {
+                  const isRec = tier.name.includes("Recommended");
+                  return (
+                    <div 
+                      key={i} 
+                      style={{ 
+                        border: isRec ? "2px solid #4f46e5" : "1px solid #e2e8f0", 
+                        borderRadius: 12, 
+                        padding: 20, 
+                        background: "#fff", 
+                        boxShadow: isRec ? "0 4px 12px rgba(79,70,229,0.08)" : "none",
+                        position: "relative",
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "between"
+                      }}
+                    >
+                      {isRec && (
+                        <span style={{ position: "absolute", top: -12, left: 16, background: "#4f46e5", color: "#fff", fontSize: 9, fontWeight: 700, padding: "3px 8px", borderRadius: 999, textTransform: "uppercase", letterSpacing: "0.5px" }}>
+                          Recommended
+                        </span>
+                      )}
+                      <div>
+                        <h4 style={{ fontSize: 15, fontWeight: 700, margin: "0 0 8px", color: "#0f172a" }}>{tier.name}</h4>
+                        <div style={{ margin: "10px 0" }}>
+                          <span style={{ fontSize: 22, fontWeight: 900, color: "#4f46e5" }}>{tier.price}</span>
+                        </div>
+                        <p style={{ fontSize: 11, color: "#64748b", margin: "0 0 16px", lineHeight: 1.5 }}>{tier.bestFor}</p>
+                        <ul style={{ padding: 0, margin: "0 0 16px", listStyle: "none" }}>
+                          {tier.deliverables.map((deliv, idx) => (
+                            <li key={idx} style={{ fontSize: 12, color: "#334155", display: "flex", alignItems: "start", gap: 6, marginBottom: 8 }}>
+                              <span style={{ color: "#10b981", fontWeight: "bold" }}>✓</span>
+                              <span>{deliv}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Services List */}
-            <h3 style={{ fontSize: 22, fontWeight: 700, margin: "0 0 16px" }}>Our {svc} in {area.name} Include:</h3>
+            <h3 style={{ fontSize: 22, fontWeight: 700, margin: "24px 0 16px" }}>Our {svc} in {area.name} Include:</h3>
             <ul style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px 24px", padding: 0, listStyle: "none", marginBottom: 32 }}>
               {[`${niche.name} Installation in ${area.name}`,`${niche.name} Repair in ${area.name}`,`${niche.name} Maintenance in ${area.name}`,`${niche.name} Replacement in ${area.name}`,`Emergency ${niche.name} ${area.name}`,`${niche.name} AMC ${area.name}`,`Affordable ${niche.name} ${area.name}`,`Certified ${niche.name} ${area.name}`,`${niche.name} at Home ${area.name}`,`Same Day ${niche.name} ${area.name}`].map(s => (
                 <li key={s} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, color: "#334155" }}>
