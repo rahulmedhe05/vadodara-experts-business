@@ -11,7 +11,7 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
   const areaSlug = area.slug;
 
   const svc = withSuffix(niche.name, "Services");
-  const yr = new Date().getFullYear();
+
 
   // Call the dynamic content generator to generate rich descriptions, specs, pricing tiers, and neighborhood relevance
   const title = `Best ${svc} in ${area.name} Vadodara`;
@@ -121,7 +121,7 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
               ⭐ Top Rated in {area.name} — {content.ratingValue}★ ({content.totalReviewCount}+ Reviews)
             </div>
             <h1 style={{ fontSize: "clamp(26px,4vw,42px)", fontWeight: 900, color: "#fff", margin: "0 0 16px", lineHeight: 1.2 }}>
-              Best {svc} in <span style={{ color: "#22d3ee" }}>{area.name}</span>,<br />Vadodara {yr}
+              Best {svc} in <span style={{ color: "#22d3ee" }}>{area.name}</span>,<br />Vadodara
             </h1>
 <p style={{ fontSize: 17, color: "#94a3b8", margin: "0 0 24px", lineHeight: 1.7 }}>
               Looking for trusted <strong style={{ color: "#e2e8f0" }}>{niche.name} in {area.name}</strong>? VadodaraExperts is {area.name}'s most trusted {niche.name} provider — serving PIN {area.pin} and surrounding localities. Certified experts, same-day availability, 90-day service guarantee. No middlemen — we are the actual service team.
@@ -185,7 +185,7 @@ export default function AreaNichePage({ area, niche }: { area: AreaType; niche: 
       <section style={{ padding: "64px 24px", background: "#fff" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 360px", gap: 48, alignItems: "start" }}>
           <div>
-            <h2 style={{ fontSize: 28, fontWeight: 800, margin: "0 0 16px" }}>{svc} in {area.name}, Vadodara — Complete Guide {yr}</h2>
+            <h2 style={{ fontSize: 28, fontWeight: 800, margin: "0 0 16px" }}>{svc} in {area.name}, Vadodara — Complete Guide</h2>
             
             {/* Dynamic Intro Paragraph */}
             <p style={{ color: "#475569", lineHeight: 1.8, marginBottom: 16, fontSize: 15 }}>
