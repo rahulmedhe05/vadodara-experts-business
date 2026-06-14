@@ -40,10 +40,8 @@ if (area && nicheForArea) {
     return Astro.redirect('/404');
   }
   
-  // Validate against dynamic keywords
-  if (niche.keywords.length > 0 && !niche.keywords.includes(seg2)) {
-    return Astro.redirect('/404');
-  }
+  // Allow all keyword slugs — keywords are generated dynamically for all 956 niches
+  // (no hard 404 block; invalid slugs are served best-effort)
   
   const kwTitle = keywordToTitle(niche.slug, niche.name, seg2);
   title = `${kwTitle} in Vadodara | VadodaraExperts`;

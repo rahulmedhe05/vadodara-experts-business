@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 import { niches } from '@/lib/data';
 import { VADODARA_AREAS } from '@/lib/areas';
-import { getNicheKeywordSlugs } from '@/lib/niche-keywords';
 
 export const prerender = true;
 
@@ -16,10 +15,9 @@ function buildAllUrls(): string[] {
     urls.push(`/${n.slug}`);
   }
   
-  // 2. All deep niche keyword routes (95,700 URLs)
+  // 2. All deep niche keyword routes (956 niches × 100 keywords = 95,600 URLs)
   for (const n of niches) {
-    const kws = getNicheKeywordSlugs(n.slug);
-    for (const kw of kws) {
+    for (const kw of n.keywords) {
       urls.push(`/${n.slug}/${kw}`);
     }
   }
