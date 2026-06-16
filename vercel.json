@@ -1,4 +1,4 @@
 {
   "framework": "astro",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- src/ components/ lib/ package.json astro.config.mjs"
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD -- src/ components/ lib/ public/ package.json astro.config.mjs"
 }
